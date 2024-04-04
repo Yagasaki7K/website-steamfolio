@@ -22,7 +22,7 @@ const SteamDetails = styled.div`
         margin: 0 auto;
         display: flex;
         content: '';
-        background: rgba(0, 0, 0, 0.6);
+        background: var(--transparent);
         color: #fff;
         font-family: "Motiva Sans", Sans-serif;
         padding: 2rem;
@@ -82,7 +82,7 @@ const SteamDetails = styled.div`
                     flex-direction: column;
 
                     p {
-                        color: #54a5d4;
+                        color: var(--theme);
                         font-size: 18px;
                     }
 
@@ -97,7 +97,7 @@ const SteamDetails = styled.div`
                         text-decoration: none;
 
                         &:hover {
-                            color: #54a5d4;
+                            color: var(--theme);
                         }
                     }
                 }
@@ -111,7 +111,7 @@ const SteamDetails = styled.div`
                     font-weight: 100;
 
                     span {
-                        border: 2px solid #ff8fb4;
+                        border: 2px solid var(--theme);
                         border-radius: 50px;
                         padding: 0.3rem;
                         font-size: 18px;
@@ -123,7 +123,7 @@ const SteamDetails = styled.div`
                     padding: 0.5rem;
                     display: flex;
                     align-items: center;
-                    background: rgba(0, 0, 0, 0.6);
+                    background: var(--background);
                     width: 99%;
 
                     .leftContent {
@@ -154,7 +154,7 @@ const SteamDetails = styled.div`
                     align-items: center;
 
                     button {
-                        background: rgba(0, 0, 0, 0.6);
+                        background: var(--transparent);
                         color: #c4c4c4;
                         padding: 0.5rem 0.6rem;
                         border: none;
@@ -165,7 +165,7 @@ const SteamDetails = styled.div`
                         transition: 0.5s;
 
                         &:hover {
-                            background: rgba(0, 0, 0, 0.8);
+                            background: var(--transparent-hard);
                             color: #fff;
                         }
                     }
@@ -173,7 +173,7 @@ const SteamDetails = styled.div`
                     .award, .avatar {
                         padding: 0.3rem;
                         margin-right: 0.42rem;
-                        background: rgba(0, 0, 0, 0.6);
+                        background: var(--transparent);
                     }
 
                     .award {
@@ -197,8 +197,8 @@ const SteamDetails = styled.div`
         display: flex;
         flex-direction: row;
         content: '';
-        background: rgba(0, 0, 0, 0.6);
-        color: #fff;
+        background: var(--transparent);
+        color: var(--white);
         font-family: "Motiva Sans", Sans-serif;
         padding: 0rem 1rem;
         margin-bottom: 1rem;
@@ -221,13 +221,13 @@ const SteamDetails = styled.div`
                 }
 
                 h3 {
-                    background: rgba(0, 0, 0, 0.2);
+                    background: var(--transparent-light);
                     
                     border-radius: 7px 7px 0 0;
                 }
 
                 p {
-                    background: rgba(0, 0, 0, 0.5);
+                    background: var(--transparent);
                     border-radius: 0 0 7px 7px;
                     margin-bottom: 1rem;
                 }
@@ -235,31 +235,31 @@ const SteamDetails = styled.div`
                 .groupDetails {
                     display: flex;
                     flex-direction: column;
-                    background: rgba(0, 0, 0, 0.5);
+                    background: var(--transparent);
                     margin-bottom: 1rem;
 
                     a {
-                        color: #fff;
+                        color: var(--white);
                         text-decoration: none;
                         margin: 0.5rem 0;
                         font-size: 1rem;
 
                         &:hover {
-                            color: #54a5d4;
+                            color: var(--theme);
                             text-decoration: underline;
                         }
                     }
 
                     .badges {
                         padding: 1rem 0rem;
-                        background: rgba(0, 0, 0, 0.8);
+                        background: var(--transparent-hard);
                         border-radius: 7px;
                         display: flex;
 
                         img {
                             width: 4rem;
                             margin: 0.2rem 0.5rem;
-                            border: 1px solid #9b9b9b;
+                            border: 1px solid var(--gray);
                             transition: 1s;
 
                             &:hover {
@@ -276,12 +276,12 @@ const SteamDetails = styled.div`
                             align-items: center;
                             margin-top: 0.2rem;
                             transition: 1s;
-                            background: rgba(0, 0, 0, 0.4);
+                            background: var(--transparent);
                             backdrop-filter: blur(20px);
-                            color: #fff;
+                            color: var(--white);
                             font-size: 1.2rem;
                             font-family: "Motiva Sans", Sans-serif;
-                            border: 1px solid #9b9b9b;
+                            border: 1px solid var(--gray);
 
                             &:hover {
                                 cursor: pointer;
@@ -305,7 +305,7 @@ const SteamDetails = styled.div`
             h2 {
                 font-weight: 100;
                 font-family: "Motiva Sans", Sans-serif;
-                color: #54a5d4;
+                color: var(--theme);
             }
 
             .title {
@@ -318,14 +318,14 @@ const SteamDetails = styled.div`
 
                 .link {
                     &:hover {
-                        color: #9b9b9b;
+                        color: var(--gray);
                     }
                 }
 
                 a {
                     padding: 0.7rem 0;
                     text-decoration: none;
-                    color: #fff;
+                    color: var(--white);
                     font-size: 18px;
                     font-weight: 100;
 
@@ -333,7 +333,7 @@ const SteamDetails = styled.div`
                         margin-left: 5px;
                         font-family: "Motiva Sans", Sans-serif;
                         font-weight: 100;
-                        color: #9b9b9b;
+                        color: var(--gray);
                         font-size: 30px;
                     }
                 }
@@ -356,7 +356,7 @@ const SteamDetails = styled.div`
         
         a {
             text-decoration: none;
-            color: #fff;
+            color: var(--white);
             font-family: "Motiva Sans", Sans-serif;
             font-weight: 100;
             font-size: 1rem;

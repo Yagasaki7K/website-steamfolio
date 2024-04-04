@@ -1,5 +1,38 @@
+:root {
+    --background: #161819;
+    --theme: #dd9247;
+    --transparent: rgba(0, 0, 0, 0.6);
+    --transparent-light: rgba(0, 0, 0, 0.2);
+    --transparent-hard: rgba(0, 0, 0, 0.8);
+    --white: #fff;
+    --gray: #9b9b9b;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+    width: 14px;
+    /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--background);
+    /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--theme);
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid var(--background);
+    /* creates padding around scroll thumb */
 }
