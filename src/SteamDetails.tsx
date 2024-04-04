@@ -23,7 +23,7 @@ const SteamDetails = styled.div`
         display: flex;
         content: '';
         background: var(--transparent);
-        color: #fff;
+        color: var(--white);
         font-family: "Motiva Sans", Sans-serif;
         padding: 2rem;
 
@@ -51,7 +51,7 @@ const SteamDetails = styled.div`
             
             .nickname {
                 line-height: 40px;
-                color: #ffffff;
+                color: var(--white);
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 overflow: hidden;
@@ -66,7 +66,7 @@ const SteamDetails = styled.div`
 
                 .subnick {
                     display: flex;
-                    color: #c4c4c4;
+                    color: var(--gray);
                     font-size: 14px;
                     margin-top: -0.5rem;
                     align-items: center;
@@ -87,12 +87,12 @@ const SteamDetails = styled.div`
                     }
 
                     i {
-                        color: #c4c4c4;
+                        color: var(--gray);
                         font-size: 15px;
                     }
 
                     a {
-                        color: #fff;
+                        color: var(--white);
                         font-size: 14px;
                         text-decoration: none;
 
@@ -155,7 +155,7 @@ const SteamDetails = styled.div`
 
                     button {
                         background: var(--transparent);
-                        color: #c4c4c4;
+                        color: var(--gray);
                         padding: 0.5rem 0.6rem;
                         border: none;
                         margin-top: -4px;
@@ -166,7 +166,7 @@ const SteamDetails = styled.div`
 
                         &:hover {
                             background: var(--transparent-hard);
-                            color: #fff;
+                            color: var(--white);
                         }
                     }
 
