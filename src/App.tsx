@@ -151,7 +151,7 @@ function App() {
                                 <img src="/js.png" alt="BadgeIcon" title="Javascript Developer" />
                                 <img src="/ts.png" alt="BadgeIcon" title="Typescript Developer" />
                                 <img src="/nodejs.png" alt="BadgeIcon" title="NodeJS Developer" />
-                                <img src="/reactjs.png" alt="BadgeIcon" title="ReactJS Experience" />
+                                <img src="/reactjs.png" alt="BadgeIcon" title="ReactJS Developer" />
                                 <img src="/nestjs.png" alt="BadgeIcon" title="NestJS Experience" />
                                 <img src="/firebase.png" alt="BadgeIcon" title="Firebase Experience" />
                                 <button title="See more on Github" onClick={() => window.location.href = githubLink}>+15</button>
