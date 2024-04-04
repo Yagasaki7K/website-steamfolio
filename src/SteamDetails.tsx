@@ -123,7 +123,8 @@ const SteamDetails = styled.div`
                     padding: 0.5rem;
                     display: flex;
                     align-items: center;
-                    background: var(--background);
+                    background: var(--transparent-light);
+                    backdrop-filter: blur(20px);
                     width: 99%;
 
                     .leftContent {
