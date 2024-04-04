@@ -13,6 +13,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sonner": "^1.4.41",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
