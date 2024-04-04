@@ -202,6 +202,10 @@ function App() {
                     </div>
                 </div>
             </div>
+
+            <div className="copyright">
+                <a href="https://github.com/Yagasaki7K" target="_blank" rel="noreferrer">© {new Date().getFullYear()} Anderson "Yagasaki" Marlon </a>
+            </div>
         </SteamDetails>
     )
 }

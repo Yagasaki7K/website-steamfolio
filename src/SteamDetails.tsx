@@ -236,6 +236,7 @@ const SteamDetails = styled.div`
                     display: flex;
                     flex-direction: column;
                     background: rgba(0, 0, 0, 0.5);
+                    margin-bottom: 1rem;
 
                     a {
                         color: #fff;
@@ -347,6 +348,20 @@ const SteamDetails = styled.div`
                 }
             }
         }
+    }
+
+    .copyright {
+        display: flex;
+        justify-content: center;
+        
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-family: "Motiva Sans", Sans-serif;
+            font-weight: 100;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }   
     }
 `
 
