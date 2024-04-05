@@ -79,7 +79,7 @@ function App() {
         const url = `https://api.github.com/search/commits?q=${encodedAuthor}`;
         const options = {
             headers: {
-                Authorization: `token ${process.env.GITHUB_API_TOKEN}`,
+                Authorization: `token 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`,
                 Accept: 'application/vnd.github.cloak-preview'
             }
         };
