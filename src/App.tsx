@@ -39,6 +39,7 @@ interface UserGitHub {
 
 function App() {
     const [infoGithub, setInfoGithub] = useState<UserGitHub>()
+    const [totalCommits, setTotalCommits] = useState<number>(0)
 
     const userGitHub = "Yagasaki7K"
     const subnick = "Anderson \"Yagasaki\" Marlon"
@@ -73,12 +74,35 @@ function App() {
     // const awardIconLink = "/award_icon.svg"
     const perfilIconLink = "https://yagasaki.dev/about"
 
+    async function getTotalCommits() {
+        const encodedAuthor = encodeURIComponent("author:yagasaki7k is:merge");
+        const url = `https://api.github.com/search/commits?q=${encodedAuthor}`;
+        const options = {
+            headers: {
+                Authorization: `token ${process.env.GITHUB_API_TOKEN}`,
+                Accept: 'application/vnd.github.cloak-preview'
+            }
+        };
+
+        try {
+            const response = await fetch(url, options);
+            const data = await response.json();
+            const totalCommits = data.total_count;
+            setTotalCommits(totalCommits);
+        } catch (error) {
+            console.error('Erro ao obter o total de commits:', error);
+            throw error;
+        }
+    }
+
     useEffect(() => {
         fetch("https://api.github.com/users/Yagasaki7K")
             .then(response => response.json())
             .then(data => {
                 setInfoGithub(data)
             });
+
+        getTotalCommits()
     }, [])
 
     const urlAvatar = "https://github.com/" + userGitHub + ".png"
@@ -130,7 +154,8 @@ function App() {
                         <div className="buttons">
                             <button onClick={() => window.location.href = twitterLink}>Send Friend Request</button>
                             <a href={awardIconLink} target="_blank" rel="noreferrer">
-                                <img className="award" src="award_icon.svg" alt="" /></a>
+                                <img className="award" src="award_icon.svg" alt="" />
+                            </a>
                             <a href={perfilIconLink} target="_blank" rel="noreferrer">
                                 <img className="avatar" src="equipped_items_icon.svg" alt="" />
                             </a>
@@ -151,7 +176,7 @@ function App() {
                                 <img src="/js.png" alt="BadgeIcon" title="Javascript Developer" />
                                 <img src="/ts.png" alt="BadgeIcon" title="Typescript Developer" />
                                 <img src="/nodejs.png" alt="BadgeIcon" title="NodeJS Developer" />
-                                <img src="/reactjs.png" alt="BadgeIcon" title="ReactJS Developer" />
+                                <img src="/bun.png" alt="BadgeIcon" title="Bun Developer" />
                                 <img src="/nestjs.png" alt="BadgeIcon" title="NestJS Experience" />
                                 <img src="/firebase.png" alt="BadgeIcon" title="Firebase Experience" />
                                 <button title="See more on Github" onClick={() => window.location.href = githubLink}>+15</button>
@@ -181,7 +206,7 @@ function App() {
                             <img src={"https://community.cloudflare.steamstatic.com/public/images/badges/02_years/steamyears" + (new Date().getFullYear() - sinceExperience) + "_54.png"} alt="BadgeIcon" title="Years of Experience" />
 
                             {
-                                getLevelByGPQ(infoGithub?.public_repos)
+                                getLevelByGPQ(totalCommits)
                             }
                         </div>
 

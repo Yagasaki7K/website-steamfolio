@@ -160,7 +160,7 @@ const SteamDetails = styled.div`
                         padding: 0.5rem 0.6rem;
                         border: none;
                         margin-top: -4px;
-                        margin-right: 0.25rem;
+                        margin-right: 0.3rem;
                         font-size: 15px;
                         cursor: pointer;
                         transition: 0.5s;
@@ -173,7 +173,7 @@ const SteamDetails = styled.div`
 
                     .award, .avatar {
                         padding: 0.3rem;
-                        margin-right: 0.42rem;
+                        margin-right: 0.3rem;
                         background: var(--transparent);
                     }
 
@@ -262,6 +262,7 @@ const SteamDetails = styled.div`
                             margin: 0.2rem 0.5rem;
                             border: 1px solid var(--gray);
                             transition: 1s;
+                            object-fit: cover;
 
                             &:hover {
                                 cursor: pointer;
@@ -292,8 +293,6 @@ const SteamDetails = styled.div`
                     }
                 }
             }
-
-            
         }
 
         .sidebar {

@@ -1,7 +1,7 @@
 {
   "name": "website-steamfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +11,8 @@
     "yagasaki": "bun update"
   },
   "dependencies": {
+    "@types/bun": "^1.0.12",
+    "dotenv": "^16.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sonner": "^1.4.41",
