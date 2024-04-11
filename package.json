@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "yagasaki": "bun update"
+    "yagasaki": "bun update",
+    "commit": "bun run build && read -p 'Digite uma descrição do commit: ' message && git add . && echo -n \"$message - \" && node getTime.js | xargs -I {} git commit -m \"$message - {}\""
   },
   "dependencies": {
     "@types/bun": "^1.0.12",
