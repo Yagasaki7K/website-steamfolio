@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react"
 import SteamDetails from "./SteamDetails"
 import { getLevelByGPQ } from "./utils/getLevelByGPQ"
-import { toast } from "sonner";
 
 interface UserGitHub {
     login: string;
@@ -41,10 +40,13 @@ interface UserGitHub {
 
 function App() {
     const [infoGithub, setInfoGithub] = useState<UserGitHub>()
-    const [totalCommits, setTotalCommits] = useState<number>(0)
+    // const [totalCommits, setTotalCommits] = useState<number>(0)
+
+    // You can see totalCommits in tab of activity in https://github.com/YOUR_USERNAME?tab=overview&from=2024-04-01&to=2024-12-31
+    const totalCommits = 554
 
     const userGitHub = "Yagasaki7K"
-    const accessToken = import.meta.env.GITHUB_API_TOKEN;
+    // const accessToken = import.meta.env.GITHUB_API_TOKEN;
     const subnick = "Anderson \"Yagasaki\" Marlon"
 
     // BlueLight
@@ -77,43 +79,43 @@ function App() {
     // const awardIconLink = "/award_icon.svg"
     const perfilIconLink = "https://yagasaki.dev/about"
 
-    async function getTotalCommits(userGitHub: string, accessToken: string): Promise<number> {
-        try {
-            const reposResponse = await fetch(`https://api.github.com/users/${userGitHub}/repos?type=public`, {
-                headers: { Authorization: `Bearer ${accessToken}` }
-            });
+    // async function getTotalCommits(userGitHub: string, accessToken: string): Promise<number> {
+    //     try {
+    //         const reposResponse = await fetch(`https://api.github.com/users/${userGitHub}/repos?type=public`, {
+    //             headers: { Authorization: `Bearer ${accessToken}` }
+    //         });
 
-            if (!reposResponse.ok) {
-                toast.error('Erro ao obter os repositórios do usuário:');
-                throw new Error('Erro ao obter os repositórios do usuário:');
-            }
+    //         if (!reposResponse.ok) {
+    //             toast.error('Erro ao obter os repositórios do usuário:');
+    //             throw new Error('Erro ao obter os repositórios do usuário:');
+    //         }
 
-            const reposData = await reposResponse.json();
+    //         const reposData = await reposResponse.json();
 
-            let totalCommits = 0;
+    //         let totalCommits = 0;
 
-            for (const repo of reposData) {
-                const commitsResponse = await fetch(`https://api.github.com/repos/${userGitHub}/${repo.name}/commits?type=public`, {
-                    headers: { Authorization: `Bearer ${accessToken}` }
-                });
+    //         for (const repo of reposData) {
+    //             const commitsResponse = await fetch(`https://api.github.com/repos/${userGitHub}/${repo.name}/commits?type=public`, {
+    //                 headers: { Authorization: `Bearer ${accessToken}` }
+    //             });
 
-                if (!commitsResponse.ok) {
-                    console.error(`Erro ao obter os commits do repositório ${repo.name}`);
-                    toast.error(`Erro ao obter os commits do repositório ${repo.name}`);
-                    continue;
-                }
+    //             if (!commitsResponse.ok) {
+    //                 console.error(`Erro ao obter os commits do repositório ${repo.name}`);
+    //                 toast.error(`Erro ao obter os commits do repositório ${repo.name}`);
+    //                 continue;
+    //             }
 
-                const commitsData = await commitsResponse.json();
-                totalCommits += commitsData.length;
-                setTotalCommits(totalCommits)
-            }
+    //             const commitsData = await commitsResponse.json();
+    //             totalCommits += commitsData.length;
+    //             setTotalCommits(totalCommits)
+    //         }
 
-            return totalCommits;
-        } catch (error) {
-            console.error('Erro:', error);
-            return 0;
-        }
-    }
+    //         return totalCommits;
+    //     } catch (error) {
+    //         console.error('Erro:', error);
+    //         return 0;
+    //     }
+    // }
 
     useEffect(() => {
         fetch("https://api.github.com/users/Yagasaki7K")
@@ -122,9 +124,9 @@ function App() {
                 setInfoGithub(data)
             });
 
-        getTotalCommits(userGitHub, accessToken)
-            .then(totalCommits => console.log('Total de commits:', totalCommits))
-            .catch(error => console.error('Erro ao obter total de commits:', error));
+        // getTotalCommits(userGitHub, accessToken)
+        //     .then(totalCommits => console.log('Total de commits:', totalCommits))
+        //     .catch(error => console.error('Erro ao obter total de commits:', error));
     }, [])
 
     const urlAvatar = "https://github.com/" + userGitHub + ".png"
