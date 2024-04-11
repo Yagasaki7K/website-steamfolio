@@ -13,34 +13,34 @@ export function getLevelByGPQ(githubProjectQuantity: number | undefined) {
     }
 
     if (githubProjectQuantity > 1) {
-        badgeImage = <img src={getLevel(1)} alt="Badges" title="Total Commits on Github" />;
+        badgeImage = <img src={getLevel(1)} alt="Badges" title="Total Commits on Github in 2024" />;
     }
 
     if (githubProjectQuantity > 5) {
-        badgeImage = <img src={getLevel(5)} alt="Badges" title="Total Commits on Github" />;
+        badgeImage = <img src={getLevel(5)} alt="Badges" title="Total Commits on Github in 2024" />;
     }
 
     if (githubProjectQuantity > 10) {
-        badgeImage = <img src={getLevel(10)} alt="Badges" title="Total Commits on Github" />;
+        badgeImage = <img src={getLevel(10)} alt="Badges" title="Total Commits on Github in 2024" />;
     }
 
     if (githubProjectQuantity > 50) {
-        badgeImage = <img src={getLevel(50)} alt="Badges" title="Total Commits on Github" />;
+        badgeImage = <img src={getLevel(50)} alt="Badges" title="Total Commits on Github in 2024" />;
     }
 
     if (githubProjectQuantity > 100) {
-        badgeImage = <img src={getLevel(100)} alt="Badges" title="Total Commits on Github" />;
+        badgeImage = <img src={getLevel(100)} alt="Badges" title="Total Commits on Github in 2024" />;
     }
 
     if (githubProjectQuantity > 500) {
-        badgeImage = <img src={getLevel(500)} alt="Badges" title="Total Commits on Github" />;
+        badgeImage = <img src={getLevel(500)} alt="Badges" title="Total Commits on Github in 2024" />;
     }
 
     const maxLimit = 40000;
 
     for (let i = 1000; i <= maxLimit; i += 1000) {
         if (githubProjectQuantity >= i) {
-            badgeImage = <img src={getLevel(i)} alt="Badges" title="Total Commits on Github" />;
+            badgeImage = <img src={getLevel(i)} alt="Badges" title="Total Commits on Github in 2024" />;
         } else {
             break;
         }

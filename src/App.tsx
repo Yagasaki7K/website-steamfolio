@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react"
 import SteamDetails from "./SteamDetails"
 import { getLevelByGPQ } from "./utils/getLevelByGPQ"
+import { toast } from "sonner";
 
 interface UserGitHub {
     login: string;
@@ -42,6 +44,7 @@ function App() {
     const [totalCommits, setTotalCommits] = useState<number>(0)
 
     const userGitHub = "Yagasaki7K"
+    const accessToken = import.meta.env.GITHUB_API_TOKEN;
     const subnick = "Anderson \"Yagasaki\" Marlon"
 
     // BlueLight
@@ -74,24 +77,41 @@ function App() {
     // const awardIconLink = "/award_icon.svg"
     const perfilIconLink = "https://yagasaki.dev/about"
 
-    async function getTotalCommits() {
-        const encodedAuthor = encodeURIComponent("author:yagasaki7k is:merge");
-        const url = `https://api.github.com/search/commits?q=${encodedAuthor}`;
-        const options = {
-            headers: {
-                Authorization: `token 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`,
-                Accept: 'application/vnd.github.cloak-preview'
-            }
-        };
-
+    async function getTotalCommits(userGitHub: string, accessToken: string): Promise<number> {
         try {
-            const response = await fetch(url, options);
-            const data = await response.json();
-            const totalCommits = data.total_count;
-            setTotalCommits(totalCommits);
+            const reposResponse = await fetch(`https://api.github.com/users/${userGitHub}/repos?type=public`, {
+                headers: { Authorization: `Bearer ${accessToken}` }
+            });
+
+            if (!reposResponse.ok) {
+                toast.error('Erro ao obter os repositórios do usuário:');
+                throw new Error('Erro ao obter os repositórios do usuário:');
+            }
+
+            const reposData = await reposResponse.json();
+
+            let totalCommits = 0;
+
+            for (const repo of reposData) {
+                const commitsResponse = await fetch(`https://api.github.com/repos/${userGitHub}/${repo.name}/commits?type=public`, {
+                    headers: { Authorization: `Bearer ${accessToken}` }
+                });
+
+                if (!commitsResponse.ok) {
+                    console.error(`Erro ao obter os commits do repositório ${repo.name}`);
+                    toast.error(`Erro ao obter os commits do repositório ${repo.name}`);
+                    continue;
+                }
+
+                const commitsData = await commitsResponse.json();
+                totalCommits += commitsData.length;
+                setTotalCommits(totalCommits)
+            }
+
+            return totalCommits;
         } catch (error) {
-            console.error('Erro ao obter o total de commits:', error);
-            throw error;
+            console.error('Erro:', error);
+            return 0;
         }
     }
 
@@ -102,7 +122,9 @@ function App() {
                 setInfoGithub(data)
             });
 
-        getTotalCommits()
+        getTotalCommits(userGitHub, accessToken)
+            .then(totalCommits => console.log('Total de commits:', totalCommits))
+            .catch(error => console.error('Erro ao obter total de commits:', error));
     }, [])
 
     const urlAvatar = "https://github.com/" + userGitHub + ".png"
