@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "yagasaki": "bun update",
-    "commit": "bun run build && read -p 'Descriptions Commit: ' message && git add . && echo -n \"$message - \" && node getTime.js | xargs -I {} git commit -m \"$message - {}\" && git push"
+    "commit": "bun update && bun run build && read -p 'Descriptions Commit: ' message && git add . && echo -n \"$message - \" && node getTime.js | xargs -I {} git commit -m \"$message - {}\" && git push"
   },
   "dependencies": {
     "@types/bun": "^1.0.12",

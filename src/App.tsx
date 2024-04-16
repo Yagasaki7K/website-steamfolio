@@ -43,7 +43,7 @@ function App() {
     // const [totalCommits, setTotalCommits] = useState<number>(0)
 
     // You can see totalCommits in tab of activity in https://github.com/YOUR_USERNAME?tab=overview&from=2024-04-01&to=2024-12-31
-    const totalCommits = 554
+    const totalCommits = 4239
 
     const userGitHub = "Yagasaki7K"
     // const accessToken = import.meta.env.GITHUB_API_TOKEN;
