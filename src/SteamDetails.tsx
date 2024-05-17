@@ -346,6 +346,11 @@ const SteamDetails = styled.div`
                         margin-right: 1rem;
                         cursor: pointer;
                     }
+
+                    .level {
+                        width: 4rem;
+                        height: 4rem;
+                    }
                 }
             }
         }

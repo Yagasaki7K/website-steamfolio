@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react"
-import SteamDetails from "./SteamDetails"
-import { getLevelByGPQ } from "./utils/getLevelByGPQ"
+import { useEffect, useState } from "react";
+import SteamDetails from "./SteamDetails";
+import { getLevelByGPQ } from "./utils/getLevelByGPQ";
 import axios from "axios";
 
 interface UserGitHub {
@@ -27,7 +26,7 @@ interface UserGitHub {
     company: string;
     blog: string;
     location: string;
-    email: null;
+    email: string | null;
     hireable: boolean;
     bio: string;
     twitter_username: string;
@@ -35,209 +34,257 @@ interface UserGitHub {
     public_gists: number;
     followers: number;
     following: number;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
 }
 
+interface Repo {
+    stargazers_count: number;
+    language: string;
+}
+
+interface LanguagePercentage {
+    name: string;
+    percentage: string;
+}
+
+interface UserRepos {
+    repos: Repo[];
+    totalStars: number;
+    totalCommits: number;
+    language: LanguagePercentage;
+}
+
+const userGitHub = "Yagasaki7K";
+
+const fetchData = async (
+    setUserInfo: (userInfo: UserGitHub) => void,
+    setUserRepos: (userRepos: UserRepos) => void,
+    github_api_key: string,
+    setLoading: (loading: boolean) => void
+) => {
+    setLoading(true);
+    try {
+        // Fetch user information
+        const userResponse = await axios.get<UserGitHub>('https://api.github.com/users/' + userGitHub, {
+            headers: { Authorization: `Bearer ${github_api_key}` }
+        });
+        setUserInfo(userResponse.data);
+        console.log('User Info', userResponse.data);
+
+        // Fetch public repositories of the user
+        const reposResponse = await axios.get<Repo[]>('https://api.github.com/users/' + userGitHub + '/repos?sort=updated', {
+            headers: { Authorization: `Bearer ${github_api_key}` },
+            params: { type: 'public' }
+        });
+        const repos = reposResponse.data;
+
+        // Fetch commits of all repositories of the user
+        const commitsResponse = await axios.get(`https://api.github.com/search/commits?q=${encodeURIComponent(`author:${userGitHub} is:merge`)}`, {
+            headers: { Authorization: `token ${github_api_key}`, Accept: 'application/vnd.github.cloak-preview' }
+        });
+        const totalCommits = commitsResponse.data.total_count;
+
+        // Calculate total stars received
+        const totalStars = repos.reduce((acc, repo) => acc + repo.stargazers_count, 0);
+
+        // Calculate percentage of the most used language
+        const languages: { [key: string]: number } = repos.reduce((acc, repo) => {
+            if (repo.language) {
+                acc[repo.language] = acc[repo.language] ? acc[repo.language] + 1 : 1;
+            }
+            return acc;
+        }, {} as { [key: string]: number });
+        const totalRepos = repos.length;
+        const languagePercentageArray: LanguagePercentage[] = [];
+        for (const language in languages) {
+            const percentage = ((languages[language] / totalRepos) * 100).toFixed(2);
+            languagePercentageArray.push({ name: language, percentage: `${percentage}%` });
+        }
+
+        setUserRepos({
+            repos,
+            totalStars,
+            totalCommits,
+            language: languagePercentageArray[0]
+        });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+    setLoading(false);
+};
+
 function App() {
-    const [infoGithub, setInfoGithub] = useState<UserGitHub>()
-    const [totalCommits, setTotalCommits] = useState<number>(0)
-
-    const github_api_key = import.meta.env.VITE_GITHUB_API_KEY || import.meta.env.GITHUB_API_KEY
-
-    const subnick = "Anderson \"Yagasaki\" Marlon"
-    const userGitHub = "Yagasaki7K"
+    const [userInfo, setUserInfo] = useState<UserGitHub | undefined>();
+    const [userRepos, setUserRepos] = useState<UserRepos | undefined>();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        getInfoGithub()
-        getTotalCommits()
-    }, [github_api_key])
+        const githubApiKey = import.meta.env.VITE_GITHUB_API_KEY || '';
+        fetchData(setUserInfo, setUserRepos, githubApiKey, setLoading);
+    }, []);
 
-    async function getTotalCommits() {
-        if (github_api_key) {
-            try {
-                const commitsResponse = await axios.get(`https://api.github.com/search/commits?q=${encodeURIComponent(`author:${'Yagasaki7K'} is:merge`)}`, {
-                    headers: {
-                        Authorization: `token ${github_api_key}`,
-                        Accept: 'application/vnd.github.cloak-preview'
-                    }
-                });
-
-                const totalCommits = commitsResponse.data.total_count;
-                setTotalCommits(totalCommits)
-                console.log(totalCommits);
-
-            } catch (error) {
-                console.error("Error fetching commits:", error);
-            }
-        } else {
-            setTotalCommits(0);
-        }
-    }
-
-    async function getInfoGithub() {
-        const response = await fetch(`https://api.github.com/users/${userGitHub}`)
-        const data = await response.json()
-        setInfoGithub(data)
-    }
+    const subnick = "Anderson \"Yagasaki\" Marlon";
 
     // BlueLight
-    // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/570/c6a479fae8979bc9c1a02378e488e3ce06b52cb1.png"
+    // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/570/c6a479fae8979bc9c1a02378e488e3ce06b52cb1.png";
     // Cuttie 
-    // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/2855140/4324f3a8e05e1c110fad71443d61c7ba82c4e474.png"
+    // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/2855140/4324f3a8e05e1c110fad71443d61c7ba82c4e474.png";
     // Halloween 
-    const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/2603600/ba1ce3d28ef75329afe4e784b1b6f9fe863cfae4.png"
+    const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/2603600/ba1ce3d28ef75329afe4e784b1b6f9fe863cfae4.png";
     // Fire
-    // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/322330/beaee5e90d93bfafa5f5f55acb23abfd28ad180c.png"
+    // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/322330/beaee5e90d93bfafa5f5f55acb23abfd28ad180c.png";
 
-    const flag = "br"
+    const flag = "br";
 
     // Year of your birthday
-    const birthday = 1997
+    const birthday = 1997;
 
     // since your are developer
-    const sinceExperience = 2020
-    const infoSubTitle = "Since 2014. Transforming code into solutions"
+    const sinceExperience = 2020;
+    const infoSubTitle = "Since 2014. Transforming code into solutions";
 
-    const badgeTitle = "Mid Software Developer"
-    const badgeEXP = "12,649"
-    const badgeIcon = "https://community.cloudflare.steamstatic.com/public/images/badges/30_steamawardnominations/level04_80.png"
+    const badgeTitle = "Mid Software Developer";
+    const badgeEXP = "12,649";
+    const badgeIcon = "https://community.cloudflare.steamstatic.com/public/images/badges/30_steamawardnominations/level04_80.png";
     // Default
-    // const badgeIcon = "/badge_icon.png"
+    // const badgeIcon = "/badge_icon.png";
 
-    const twitterLink = "https://twitter.com/Yagasaki7K"
-    const awardIconLink = "https://yagasaki.dev/about#awards"
+    const twitterLink = "https://twitter.com/" + userGitHub;
+    const awardIconLink = "https://yagasaki.dev/about#awards";
     // Default
-    // const awardIconLink = "/award_icon.svg"
-    const perfilIconLink = "https://yagasaki.dev/about"
+    // const awardIconLink = "/award_icon.svg";
+    const perfilIconLink = "https://yagasaki.dev/about";
 
-    const urlAvatar = "https://github.com/" + userGitHub + ".png"
-    const nickname = infoGithub?.name
-    const location = infoGithub?.location
-    const infoTitle = infoGithub?.bio
-    const githubLink = "https://github.com/" + userGitHub
+    const urlAvatar = "https://github.com/" + userGitHub + ".png";
+    const nickname = userInfo?.name;
+    const location = userInfo?.location;
+    const infoTitle = userInfo?.bio;
+    const githubLink = "https://github.com/" + userGitHub;
+
+    console.log(userRepos, userInfo);
 
     return (
-        <SteamDetails>
-            <div className="background"></div>
+        loading ? (<p>Loading ...</p>) : (
+            <SteamDetails>
+                <div className="background"></div>
 
-            <div className="content">
-                <div className="header">
-                    <div className="avatar">
-                        <img src={urlAvatar} alt="" />
-                        <img className="border" src={avatarBorder} alt="" />
-                    </div>
-
-                    <div className="nickname">
-                        <h2>{nickname}</h2>
-
-                        <div className="subnick">
-                            <p>{subnick}</p>
-                            <p className="city"><img src={"https://community.cloudflare.steamstatic.com/public/images/countryflags/" + flag + ".gif"} /> {location}</p>
+                <div className="content">
+                    <div className="header">
+                        <div className="avatar">
+                            <img src={urlAvatar} alt="" />
+                            <img className="border" src={avatarBorder} alt="" />
                         </div>
 
-                        <div className="info">
-                            <p>{infoTitle}</p>
-                            <i>{infoSubTitle}</i>
-                            <a href={githubLink}>View more info</a>
-                        </div>
-                    </div>
+                        <div className="nickname">
+                            <h2>{nickname}</h2>
 
-                    <div className="level">
-                        <h2>Nível <span>{new Date().getFullYear() - birthday}</span></h2>
-
-                        <div className="badge">
-                            <div className="leftContent">
-                                <img src={badgeIcon} alt="BadgeIcon" />
+                            <div className="subnick">
+                                <p>{subnick}</p>
+                                <p className="city"><img src={"https://community.cloudflare.steamstatic.com/public/images/countryflags/" + flag + ".gif"} /> {location}</p>
                             </div>
 
-                            <div className="rightContent">
-                                <h4>{badgeTitle}</h4>
-                                <p>{badgeEXP} XP</p>
+                            <div className="info">
+                                <p>{infoTitle}</p>
+                                <i>{infoSubTitle}</i>
+                                <a href={githubLink}>View more info</a>
                             </div>
                         </div>
 
-                        <div className="buttons">
-                            <button onClick={() => window.location.href = twitterLink}>Send Friend Request</button>
-                            <a href={awardIconLink} target="_blank" rel="noreferrer">
-                                <img className="award" src="award_icon.svg" alt="" />
-                            </a>
-                            <a href={perfilIconLink} target="_blank" rel="noreferrer">
-                                <img className="avatar" src="equipped_items_icon.svg" alt="" />
-                            </a>
-                            <button onClick={() => window.location.href = githubLink}>...</button>
+                        <div className="level">
+                            <h2>Nível <span>{new Date().getFullYear() - birthday}</span></h2>
+
+                            <div className="badge">
+                                <div className="leftContent">
+                                    <img src={badgeIcon} alt="BadgeIcon" />
+                                </div>
+
+                                <div className="rightContent">
+                                    <h4>{badgeTitle}</h4>
+                                    <p>{badgeEXP} XP</p>
+                                </div>
+                            </div>
+
+                            <div className="buttons">
+                                <button onClick={() => window.location.href = twitterLink}>Send Friend Request</button>
+                                <a href={awardIconLink} target="_blank" rel="noreferrer">
+                                    <img className="award" src="award_icon.svg" alt="" />
+                                </a>
+                                <a href={perfilIconLink} target="_blank" rel="noreferrer">
+                                    <img className="avatar" src="equipped_items_icon.svg" alt="" />
+                                </a>
+                                <button onClick={() => window.location.href = githubLink}>...</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="body">
-                <div className="subgroups">
-                    <div className="group">
-                        <h3>YAGASAKI 矢ヶ崎-KATSURAGI -葛城</h3>
-                        <p><img src="https://github.com/tairosonloa/tairosonloa/blob/main/assets/wave.gif?raw=true" width="15px" /> Hi, I'm <b>Anderson Marlon</b>, a Software Developer with experience building systems and applications scalable in the industries of Chatbot, Artificial Intelligence, Financial Technology (Fintech), Affiliates, Brewery, Health, Journalism, Sustainability, Sales / Entrepreneurship, Podcasts, Advocate, Solutions Tech, Referral Marketing, Government Solutions Assistance and Electronic Sport Scenario & Black Belt Taekwondo @ Campinas Fighters.</p>
+                <div className="body">
+                    <div className="subgroups">
+                        <div className="group">
+                            <h3>About</h3>
+                            <p><img src="https://github.com/tairosonloa/tairosonloa/blob/main/assets/wave.gif?raw=true" width="15px" /> Hi, I'm <b>Anderson Marlon</b>, a Software Developer with experience building systems and applications scalable in the industries of Chatbot, Artificial Intelligence, Financial Technology (Fintech), Affiliates, Brewery, Health, Journalism, Sustainability, Sales / Entrepreneurship, Podcasts, Advocate, Solutions Tech, Referral Marketing, Government Solutions Assistance and Electronic Sport Scenario & Black Belt Taekwondo @ Campinas Fighters.</p>
 
-                        <h3>Technologies</h3>
-                        <div className="groupDetails">
+                            <h3>Technologies</h3>
+                            <div className="groupDetails">
+                                <div className="badges">
+                                    <img src="/js.png" alt="BadgeIcon" title="Javascript Developer" />
+                                    <img src="/ts.png" alt="BadgeIcon" title="Typescript Developer" />
+                                    <img src="/nodejs.png" alt="BadgeIcon" title="NodeJS Developer" />
+                                    <img src="/bun.png" alt="BadgeIcon" title="Bun Developer" />
+                                    <img src="/nestjs.png" alt="BadgeIcon" title="NestJS Experience" />
+                                    <img src="/firebase.png" alt="BadgeIcon" title="Firebase Experience" />
+                                    <button title="See more on Github" onClick={() => window.location.href = githubLink}>+15</button>
+                                </div>
+                            </div>
+
+                            <h3>Latest Articles on my Blog (PT-BR)</h3>
+                            <div className="groupDetails">
+                                <a href="https://yagasaki.dev/search/" target="_blank" rel="noreferrer">× Como atualizar seu README do Github com as últimas publicações de Blog ou Dev.to</a>
+                                <a href="https://yagasaki.dev/search/" target="_blank" rel="noreferrer">× Fazendo deploy da sua aplicação Web na Vercel</a>
+                                <a href="https://yagasaki.dev/search/" target="_blank" rel="noreferrer">× Análise do Arc Browser, meu substituto do Google Chrome</a>
+                                <a href="https://yagasaki.dev/search/" target="_blank" rel="noreferrer">× TypeScript - Types vs. Interfaces e qual usar escolher no próximo projeto?</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sidebar">
+                        <h2>Currently Online</h2>
+
+                        <div className="links">
+                            <a href="">Badges <span>87</span></a>
+
                             <div className="badges">
-                                <img src="/js.png" alt="BadgeIcon" title="Javascript Developer" />
+                                <img src="/js.png" alt="BadgeIcon" title="Node Developer" />
                                 <img src="/ts.png" alt="BadgeIcon" title="Typescript Developer" />
-                                <img src="/nodejs.png" alt="BadgeIcon" title="NodeJS Developer" />
-                                <img src="/bun.png" alt="BadgeIcon" title="Bun Developer" />
-                                <img src="/nestjs.png" alt="BadgeIcon" title="NestJS Experience" />
-                                <img src="/firebase.png" alt="BadgeIcon" title="Firebase Experience" />
-                                <button title="See more on Github" onClick={() => window.location.href = githubLink}>+15</button>
+
+                                <img src={"https://community.cloudflare.steamstatic.com/public/images/badges/02_years/steamyears" + (new Date().getFullYear() - sinceExperience) + "_54.png"} alt="BadgeIcon" title="Years of Experience" />
+
+                                {
+                                    getLevelByGPQ(userRepos?.totalCommits)
+                                }
+                            </div>
+
+                            <a href={githubLink} target="_blank" rel="noreferrer">Public Repositories <span>{userInfo?.public_repos}</span></a>
+                            <a href={githubLink} target="_blank" rel="noreferrer">Total Stars <span>{userRepos?.totalStars}</span></a>
+                            <a href={githubLink} target="_blank" rel="noreferrer">Following <span>{userInfo?.following}</span></a>
+                            <a href={githubLink} target="_blank" rel="noreferrer">Followers <span>{userInfo?.followers}</span></a>
+
+                            <h2 className="title">Top Repositories</h2>
+
+                            <div className="links">
+                                <a href="https://github.com/Yagasaki7K/website-steamfolio" className="link" target="_blank" rel="noreferrer">steamfolio</a>
+                                <a href="https://github.com/Yagasaki7K/website-onigirihardcore" className="link" target="_blank" rel="noreferrer">onigirihardcore</a>
+                                <a href="https://github.com/Yagasaki7K/website-essentials" className="link" target="_blank" rel="noreferrer">essentials</a>
+                                <a href="https://github.com/Yagasaki7K/website-findyourpet" className="link" target="_blank" rel="noreferrer">findyourpet</a>
+                                <a href="https://github.com/Yagasaki7K/website-empreguei" className="link" target="_blank" rel="noreferrer">empreguei</a>
                             </div>
                         </div>
-
-                        <h3>Latest Articles on my Blog (PT-BR)</h3>
-                        <div className="groupDetails">
-                            <a href="https://yagasaki.dev/blog/evento-da-rocketseat-junto-da-minha-experi%C3%AAncia-com-bun" target="_blank" rel="noreferrer">× Evento da Rocketseat junto da minha experiência com Bun</a>
-                            <a href="https://yagasaki.dev/blog/como-criar-um-blog-usando-github-pages-obsidian-quartz" target="_blank" rel="noreferrer">× Como criar um blog usando Github Pages + Obsidian + Quartz</a>
-                            <a href="https://yagasaki.dev/blog/notificacao-automatica-da-twitch-para-o-discord" target="_blank" rel="noreferrer">× Notificação automática da Twitch para o Discord</a>
-                            <a href="https://yagasaki.dev/blog/cultivar-a-semente-ou-usar-um-kit-de-ferramentas" target="_blank" rel="noreferrer">× Cultivar a Semente ou usar um Kit de Ferramentas?</a>
-                            <a href="https://yagasaki.dev/blog/node-br-em-campinas-pelo-frontend-universe" target="_blank" rel="noreferrer">× Evento do NodeBR em Campinas - Frontend Universe</a>
-                        </div>
                     </div>
                 </div>
-                <div className="sidebar">
-                    <h2>Currently Online</h2>
-
-                    <div className="links">
-                        <a href="">Badges <span>87</span></a>
-
-                        <div className="badges">
-                            <img src="/js.png" alt="BadgeIcon" title="Node Developer" />
-                            <img src="/ts.png" alt="BadgeIcon" title="Typescript Developer" />
-
-                            <img src={"https://community.cloudflare.steamstatic.com/public/images/badges/02_years/steamyears" + (new Date().getFullYear() - sinceExperience) + "_54.png"} alt="BadgeIcon" title="Years of Experience" />
-
-                            {
-                                getLevelByGPQ(totalCommits)
-                            }
-                        </div>
-
-                        <a href={githubLink} target="_blank" rel="noreferrer">Public Repositories <span>{infoGithub?.public_repos}</span></a>
-                        <a href={githubLink} target="_blank" rel="noreferrer">Public Gists <span>{infoGithub?.public_gists}</span></a>
-                        <a href={githubLink} target="_blank" rel="noreferrer">Followers <span>{infoGithub?.followers}</span></a>
-                        <a href={githubLink} target="_blank" rel="noreferrer">Following <span>{infoGithub?.following}</span></a>
-                    </div>
-
-                    <h2 className="title">Top Repositories</h2>
-
-                    <div className="links">
-                        <a href="https://github.com/Yagasaki7K/website-essentials" className="link" target="_blank" rel="noreferrer">essentials</a>
-                        <a href="https://github.com/Yagasaki7K/website-onigirihardcore" className="link" target="_blank" rel="noreferrer">onigirihardcore</a>
-                        <a href="https://github.com/Yagasaki7K/website-findyourpet" className="link" target="_blank" rel="noreferrer">findyourpet</a>
-                        <a href="https://github.com/Yagasaki7K/website-steamfolio" className="link" target="_blank" rel="noreferrer">steamfolio</a>
-                        <a href="https://github.com/Yagasaki7K/website-empreguei" className="link" target="_blank" rel="noreferrer">empreguei</a>
-                    </div>
+                <div className="copyright">
+                    <a href="https://github.com/Yagasaki7K" target="_blank" rel="noreferrer">© {new Date().getFullYear()} Anderson "Yagasaki" Marlon </a>
                 </div>
-            </div>
-
-            <div className="copyright">
-                <a href="https://github.com/Yagasaki7K" target="_blank" rel="noreferrer">© {new Date().getFullYear()} Anderson "Yagasaki" Marlon </a>
-            </div>
-        </SteamDetails>
+            </SteamDetails>
+        )
     )
 }
 

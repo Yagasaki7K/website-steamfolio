@@ -13,34 +13,34 @@ export function getLevelByGPQ(githubProjectQuantity: number | undefined) {
     }
 
     if (githubProjectQuantity > 1) {
-        badgeImage = <img src={getLevel(1)} alt="Badges" title={githubProjectQuantity + " contributions in the last year"} />;
+        badgeImage = <img src={getLevel(1)} alt="Badges" className="level" title={githubProjectQuantity + " contributions in this account"} />;
     }
 
     if (githubProjectQuantity > 5) {
-        badgeImage = <img src={getLevel(5)} alt="Badges" title={githubProjectQuantity + " contributions in the last year"} />;
+        badgeImage = <img src={getLevel(5)} alt="Badges" className="level" title={githubProjectQuantity + " contributions in this account"} />;
     }
 
     if (githubProjectQuantity > 10) {
-        badgeImage = <img src={getLevel(10)} alt="Badges" title={githubProjectQuantity + " contributions in the last year"} />;
+        badgeImage = <img src={getLevel(10)} alt="Badges" className="level" title={githubProjectQuantity + " contributions in this account"} />;
     }
 
     if (githubProjectQuantity > 50) {
-        badgeImage = <img src={getLevel(50)} alt="Badges" title={githubProjectQuantity + " contributions in the last year"} />;
+        badgeImage = <img src={getLevel(50)} alt="Badges" className="level" title={githubProjectQuantity + " contributions in this account"} />;
     }
 
     if (githubProjectQuantity > 100) {
-        badgeImage = <img src={getLevel(100)} alt="Badges" title={githubProjectQuantity + " contributions in the last year"} />;
+        badgeImage = <img src={getLevel(100)} alt="Badges" className="level" title={githubProjectQuantity + " contributions in this account"} />;
     }
 
     if (githubProjectQuantity > 500) {
-        badgeImage = <img src={getLevel(500)} alt="Badges" title={githubProjectQuantity + " contributions in the last year"} />;
+        badgeImage = <img src={getLevel(500)} alt="Badges" className="level" title={githubProjectQuantity + " contributions in this account"} />;
     }
 
     const maxLimit = 40000;
 
     for (let i = 1000; i <= maxLimit; i += 1000) {
         if (githubProjectQuantity >= i) {
-            badgeImage = <img src={getLevel(i)} alt="Badges" title={githubProjectQuantity + " contributions in the last year"} />;
+            badgeImage = <img src={getLevel(i)} alt="Badges" className="level" title={githubProjectQuantity + " contributions in this account"} />;
         } else {
             break;
         }
