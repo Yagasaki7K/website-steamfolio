@@ -4,22 +4,22 @@
 
 <p align="center">
    <a href="https://www.linkedin.com/in/andersonmarlon/">
-      <img alt="AndersonMarlon" src="https://img.shields.io/badge/-AndersonMarlon-dd9247?style=flat&logo=Linkedin&logoColor=white" />
+      <img alt="AndersonMarlon" src="https://img.shields.io/badge/-AndersonMarlon-1fb5f1?style=flat&logo=Linkedin&logoColor=white" />
    </a>
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/Yagasaki7K/website-steamfolio?color=dd9247">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/Yagasaki7K/website-steamfolio?color=1fb5f1">
 
   <a href="https://github.com/Yagasaki7K/website-steamfolio/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Yagasaki7K/website-steamfolio?color=dd9247">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Yagasaki7K/website-steamfolio?color=1fb5f1">
   </a>
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-dd9247">
-  <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/Yagasaki7K/website-steamfolio?color=dd9247" />
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-1fb5f1">
+  <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/Yagasaki7K/website-steamfolio?color=1fb5f1" />
   <a href="https://twitter.com/yagasaki7k">
     <img src="https://img.shields.io/twitter/follow/medusajs.svg?label=Contact%20me%20at%20@Yagasaki7K" alt="Contact me at @Yagasaki7K" />
   </a>
 </p>
 
 <div align="center">
-  <sub>Steamfolio. Built with 🧡 by
+  <sub>Steamfolio. Built with 💙 by
     <a href="https://github.com/Yagasaki7K">Anderson "Yagasaki" Marlon</a> and
     <a href="https://github.com/Yagasaki7K/website-steamfolio/graphs/contributors">
       contributors
