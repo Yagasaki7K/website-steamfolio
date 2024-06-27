@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://pbs.twimg.com/media/GKWMNqpWoAAOGB5?format=jpg&name=large" width="800"/>
+   <img src="https://github.com/Yagasaki7K/website-steamfolio/assets/23272064/508c8d81-7cf7-44d6-8246-4297923ecee4" width="800"/>
 </p>
 
 <p align="center">
