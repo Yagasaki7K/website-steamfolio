@@ -128,12 +128,14 @@ function App() {
 
     // BlueLight
     // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/570/c6a479fae8979bc9c1a02378e488e3ce06b52cb1.png";
-    // Cuttie 
+    // Cuttie
     // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/2855140/4324f3a8e05e1c110fad71443d61c7ba82c4e474.png";
-    // Halloween 
-    const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/2603600/ba1ce3d28ef75329afe4e784b1b6f9fe863cfae4.png";
+    // Halloween
+    // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/2603600/ba1ce3d28ef75329afe4e784b1b6f9fe863cfae4.png";
     // Fire
     // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/322330/beaee5e90d93bfafa5f5f55acb23abfd28ad180c.png";
+    // Summer
+    const avatarBorder = "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/2861690/b921dcff9e6fffb20bd91b29700ead7468f36737.png"
 
     const flag = "br";
 
@@ -156,7 +158,8 @@ function App() {
     // const awardIconLink = "/award_icon.svg";
     const perfilIconLink = "https://yagasaki.dev/about";
 
-    const urlAvatar = "https://github.com/" + userGitHub + ".png";
+    // const urlAvatar = "https://github.com/" + userGitHub + ".png";
+    const fixedAvatar = "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/2861690/c6de335c0a6737e5105eef701af2d3284ab513c4.gif";
     const nickname = userInfo?.name;
     const location = userInfo?.location;
     const infoTitle = userInfo?.bio;
@@ -172,7 +175,7 @@ function App() {
                 <div className="content">
                     <div className="header">
                         <div className="avatar">
-                            <img src={urlAvatar} alt="" />
+                            <img src={fixedAvatar} alt="" />
                             <img className="border" src={avatarBorder} alt="" />
                         </div>
 
