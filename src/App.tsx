@@ -3,6 +3,13 @@ import SteamDetails from "./SteamDetails";
 import { getLevelByGPQ } from "./utils/getLevelByGPQ";
 import axios from "axios";
 
+interface Article {
+    title: string;
+    link: string;
+    pubDate: Date;
+    description: string;
+}
+
 interface UserGitHub {
     login: string;
     id: number;
@@ -124,6 +131,47 @@ function App() {
         fetchData(setUserInfo, setUserRepos, githubApiKey, setLoading);
     }, []);
 
+    // ARTIGO DE BLOG - CONSUMINNDO UM XML - COMENTE SE NÃO QUISER USAR NO SEU PROJETO
+    const [articles, setArticles] = useState<Article[]>([]);
+
+    // ARTIGO DE BLOG - CONSUMINNDO UM XML - COMENTE SE NÃO QUISER USAR NO SEU PROJETO
+    useEffect(() => {
+        const fetchArticles = async () => {
+          try {
+            const response = await fetch('https://raw.githubusercontent.com/Yagasaki7K/website-yagasaki/refs/heads/main/article.xml'); // Substitua pela URL real
+            const xmlData = await response.text();
+    
+            // Usando DOMParser para analisar o XML no navegador
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlData, 'application/xml');
+    
+            // Acessando os itens do feed RSS
+            const items = xmlDoc.getElementsByTagName('item');
+            const fetchedArticles: Article[] = [];
+    
+            for (let i = 0; i < items.length; i++) {
+              const item = items[i];
+              const title = item.getElementsByTagName('title')[0].textContent || '';
+              const link = item.getElementsByTagName('link')[0].textContent || '';
+              const pubDate = new Date(item.getElementsByTagName('pubDate')[0].textContent || '');
+              const description = item.getElementsByTagName('description')[0].textContent || '';
+    
+              fetchedArticles.push({ title, link, pubDate, description });
+            }
+    
+            // Ordena os artigos por data (mais recente primeiro)
+            fetchedArticles.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+    
+            // Seleciona os quatro artigos mais recentes
+            setArticles(fetchedArticles.slice(0, 4));
+          } catch (error) {
+            console.error('Erro ao processar o arquivo XML:', error);
+          }
+        };
+    
+        fetchArticles();
+    }, []);
+
     const subnick = "Anderson \"Yagasaki\" Marlon";
 
     // BlueLight
@@ -240,13 +288,28 @@ function App() {
                                 </div>
                             </div>
 
+                            {/* Você não precisa copiar esse método, já que estou apenas consumindo um arquivo XML para ler os artigos do meu site */}
+                            {/* Mas caso queira, remova o comentário abaixo dele e utilize de forma estática*/}
+
+                            {/* CONSUMINNDO DO useEffect - COMENTE SE NÃO QUISER USAR NO SEU PROJETO */}
                             <h3>Latest Articles on my Blog (PT-BR)</h3>
+                            <div className="groupDetails">
+                                {
+                                    articles.map((article, index) => (
+                                        <span key={index}>
+                                            <a href={article.link} target="_blank" rel="noreferrer">× {article.title}</a>
+                                        </span>
+                                    ))
+                                }
+                            </div>
+
+                            {/* <h3>Latest Articles on my Blog (PT-BR)</h3>
                             <div className="groupDetails">
                                 <a href="https://yagasaki.dev/search/" target="_blank" rel="noreferrer">× Como atualizar seu README do Github com as últimas publicações de Blog ou Dev.to</a>
                                 <a href="https://yagasaki.dev/search/" target="_blank" rel="noreferrer">× Fazendo deploy da sua aplicação Web na Vercel</a>
                                 <a href="https://yagasaki.dev/search/" target="_blank" rel="noreferrer">× Análise do Arc Browser, meu substituto do Google Chrome</a>
                                 <a href="https://yagasaki.dev/search/" target="_blank" rel="noreferrer">× TypeScript - Types vs. Interfaces e qual usar escolher no próximo projeto?</a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="sidebar">
@@ -284,7 +347,7 @@ function App() {
                     </div>
                 </div>
                 <div className="copyright">
-                    <a href="https://github.com/Yagasaki7K" target="_blank" rel="noreferrer">© {new Date().getFullYear()} Anderson "Yagasaki" Marlon </a>
+                    <a href="https://github.com/Yagasaki7K" target="_blank" rel="noreferrer">© 2024 - {new Date().getFullYear()} Anderson "Yagasaki" Marlon </a>
                 </div>
             </SteamDetails>
         )

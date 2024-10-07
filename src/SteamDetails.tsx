@@ -241,15 +241,18 @@ const SteamDetails = styled.div`
                     background: var(--transparent);
                     margin-bottom: 1rem;
 
-                    a {
-                        color: var(--white);
-                        text-decoration: none;
-                        margin: 0.5rem 0;
-                        font-size: 1rem;
+                    span {
+                        margin: 0.65rem 0;
+                        
+                        a {
+                            color: var(--white);
+                            text-decoration: none;
+                            font-size: 1rem;
 
-                        &:hover {
-                            color: var(--theme);
-                            text-decoration: underline;
+                            &:hover {
+                                color: var(--theme);
+                                text-decoration: underline;
+                            }
                         }
                     }
 
