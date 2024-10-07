@@ -52,9 +52,6 @@ const SteamDetails = styled.div`
             .nickname {
                 line-height: 40px;
                 color: var(--white);
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
                 padding: 0 2rem;
                 width: 22.5rem;
 
@@ -80,6 +77,11 @@ const SteamDetails = styled.div`
                 .info {
                     display: flex;
                     flex-direction: column;
+                    max-width: 300px;
+
+                    p, i {
+                        line-height: 23px;
+                    }
 
                     p {
                         color: var(--theme);
