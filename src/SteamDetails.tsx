@@ -7,7 +7,7 @@ const SteamDetails = styled.div`
         width: 100%;
         height: 100vh;
         /* background: url(background-cuttie.gif); */
-        background: url(background-halloween.gif);
+        background: url(background-winter.gif);
         position: fixed;
         background-size: cover;
         background-position: center;

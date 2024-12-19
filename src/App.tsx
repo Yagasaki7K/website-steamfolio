@@ -183,7 +183,7 @@ function App() {
     // Fire
     // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/322330/beaee5e90d93bfafa5f5f55acb23abfd28ad180c.png";
     // Summer
-    const avatarBorder = "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/3257180/7454f5391c44d910a5f8b45571fc71288c2bfda4.png"
+    const avatarBorder = "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/items/2861720/410eecdbc6f2505e98863ab4200ca454032b40a2.png"
 
     const flag = "br";
 
@@ -192,7 +192,7 @@ function App() {
 
     // since your are developer
     const sinceExperience = 2020;
-    const infoSubTitle = "Since 2014. Transforming code into solutions";
+    const infoSubTitle = "Transforming code into solutions";
 
     const badgeTitle = "Mid Software Developer";
     const badgeEXP = "12,649";
@@ -207,7 +207,7 @@ function App() {
     const perfilIconLink = "https://yagasaki.dev/about";
 
     // const urlAvatar = "https://github.com/" + userGitHub + ".png";
-    const fixedAvatar = "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/3257180/edf6cced80a17a753b0efd089ffad8b3932e100f.gif";
+    const fixedAvatar = "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/items/2861720/0f9367f89fad6b92c96b686442d61bcb86d627f5.gif";
     const nickname = userInfo?.name;
     const location = userInfo?.location;
     const infoTitle = userInfo?.bio;
