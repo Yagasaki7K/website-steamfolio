@@ -32,11 +32,22 @@
 - [📌 Table of Contents](#-table-of-contents)
 - [👀 Demo Website](#-demo-website)
 - [💻 Technologies](#-technologies)
-- [🚀 Features](#-features)
-- [🚧 How to run](#-how-to-run)
-- [🐛 Issues](#-issues)
-- [🎉 Contributing](#-contributing)
-- [🍃 Understanding the variables](#-understand-the-variables)
+- [Application Documentation](#application-documentation)
+  - [Overview](#overview)
+  - [Key Features](#key-features)
+  - [Application Structure](#application-structure)
+    - [Components](#components)
+    - [Utility Functions](#utility-functions)
+  - [API Integration](#api-integration)
+    - [GitHub API](#github-api)
+    - [Blog Feed](#blog-feed)
+  - [Environment Variables](#environment-variables)
+  - [How to Run the Application](#how-to-run-the-application)
+    - [Prerequisites](#prerequisites)
+    - [Steps](#steps)
+  - [File Structure](#file-structure)
+  - [Customization](#customization)
+  - [Contributing](#contributing)
 - [📕 License](#-license)
 
 # 👀 Demo Website
@@ -53,57 +64,181 @@ This project was made using the follow technologies:
 * Styled Components
 * Vite
 * Steam API
-
-# 🚀 Features
-
-Portfolio 
-
-# 🚧 How to run
-
-```bash
-# Clone Repository
-$ git clone https://github.com/Yagasaki7K/website-steamfolio.git
-$ Go to folder using terminal
-$ bun install (needs bun installed)
-$ bun dev (to start the project on http://localhost:5173/)
-```
+* GitHub API
 
 If you want something, wait for `yarn build` to be obeyed, and after that open a little change decision!
 
-# 🐛 Issues
+# Application Documentation
 
-Feel free to **file a new issue** with a respective title and description on the [Steamfolio](https://github.com/Yagasaki7K/website-steamfolio/issues) repository. If you already found a solution to your problem, **i would love to review your pull request**!
+This documentation provides an overview of the application and its functionalities to help developers understand its structure and make modifications as needed.
 
-# 🎉 Contributing
+---
 
-First of all, thank you for being interested in helping out, your time is always appreciated in every way. :100:
+## Overview
+This React-based application fetches and displays data from the GitHub API and an XML-based blog feed. It provides an interactive interface showcasing user information, repositories, achievements, and blog articles. It also offers customizable visual elements such as avatars and badges.
 
-Here's some tips:
+---
 
-* Check the [issues page](https://github.com/Yagasaki7K/website-steamfolio/issues) for already opened issues (or maybe even closed ones) that might already address your question/bug/feature request.
-* Feature requests are welcomed! Provide some details on why it would be helpful for you and others, explain how you're using bull-board and if possible even some screenshots if you are willing to mock something!
+## Key Features
 
-# 🍃 Understanding the variables
+1. **GitHub Integration**:
+   - Fetches user details, repositories, stars, and commit counts using the GitHub API.
+   - Displays the most-used programming language based on repositories.
 
-- **infoGithub**: Stores information about the user fetched from the GitHub API.
-- **userGitHub**: GitHub username for whom the information is fetched.
-- **subnick**: Subtitle or additional name information for the user.
-- **avatarBorder**: URL of the user's avatar with specific border.
-- **flag**: Country code for the user's flag.
-- **birthday**: User's birth year.
-- **sinceExperience**: Year the user started experience as a developer.
-- **infoSubTitle**: Subtitle for the user's information.
-- **badgeTitle**: Title of the user's badge or insignia.
-- **badgeEXP**: Amount of experience associated with the badge.
-- **badgeIcon**: URL of the badge icon.
-- **twitterLink**: URL of the user's Twitter profile.
-- **awardIconLink**: URL for the award icon.
-- **perfilIconLink**: URL for the profile icon.
-- **urlAvatar**: URL of the user's avatar.
-- **nickname**: Nickname or name of the user.
-- **location**: User's location based with GitHub info.
-- **infoTitle**: Title of the user's information.
-- **githubLink**: URL of the user's profile on GitHub.
+2. **Blog Integration**:
+   - Parses an XML feed to display the latest blog articles.
+   - Supports sorting and filtering of articles.
+
+3. **Dynamic User Profile**:
+   - Customizable avatar, nickname, and achievements.
+   - Real-time badges and stats fetched from APIs.
+
+4. **Interactive UI**:
+   - Buttons and links to navigate to user social profiles and repositories.
+   - Dynamically styled components for a modern look.
+
+---
+
+## Application Structure
+
+### Components
+
+1. **`App`**:
+   - The main component that fetches and displays data.
+   - Uses React hooks like `useState` and `useEffect` to manage state and side effects.
+
+2. **`SteamDetails`**:
+   - A wrapper component for the UI layout and design.
+
+### Utility Functions
+
+1. **`getLevelByGPQ`**:
+   - A utility function to calculate user levels based on their GitHub stats.
+
+2. **`fetchData`**:
+   - Fetches GitHub user information and repositories.
+   - Calculates total stars, commits, and programming language usage.
+
+3. **`fetchArticles`**:
+   - Fetches and parses an XML feed to extract blog articles.
+   - Sorts and displays the four latest articles.
+
+---
+
+## API Integration
+
+### GitHub API
+- **Endpoints Used**:
+  1. `https://api.github.com/users/{username}` - Fetches user details.
+  2. `https://api.github.com/users/{username}/repos` - Fetches repositories.
+  3. `https://api.github.com/search/commits` - Fetches total commits.
+
+- **Headers**:
+  ```json
+  {
+    "Authorization": "Bearer <github_api_key>",
+    "Accept": "application/vnd.github.cloak-preview"
+  }
+  ```
+
+### Blog Feed
+- **Endpoint**: 
+  `https://raw.githubusercontent.com/Yagasaki7K/website-yagasaki/refs/heads/main/article.xml`
+
+- **Parsing**:
+  - Uses the `DOMParser` to parse the XML.
+  - Extracts `title`, `link`, `pubDate`, and `description` fields.
+
+This can be removed or changed to whatever XML is needed, following the practices of each blog/site.
+
+---
+
+## Environment Variables
+
+1. `VITE_GITHUB_API_KEY` - The GitHub API token for authentication.
+
+---
+
+## How to Run the Application
+
+### Prerequisites
+1. **Node.js** and **npm/yarn** or **Bun** installed.
+2. A valid GitHub API token.
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:Yagasaki7K/website-steamfolio.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install or yarn or bun install
+   ```
+3. Create a `.env` file and add the GitHub API token:
+   ```env
+   VITE_GITHUB_API_KEY=<your_github_api_key>
+   ```
+4. Start the application:
+   ```bash
+   npm run dev or yarn dev or bun run dev
+   ```
+5. Access the application at `http://localhost:3000`.
+
+---
+
+## File Structure
+```plaintext
+src/
+├── components/
+│   └── SteamDetails.tsx  # Layout wrapper component
+├── utils/
+│   └── getLevelByGPQ.ts  # Utility function for level calculation
+├── App.tsx               # Main application logic
+└── styles/               # CSS/SCSS files for styling
+```
+
+---
+
+## Customization
+
+- **infoGithub**: Contains detailed information about the user fetched from the GitHub API, including name, bio, location, and more.
+- **userGitHub**: The GitHub username used to fetch information and data for the specified user.
+- **subnick**: A subtitle or additional alias for the user, providing extra personalization.
+- **avatarBorder**: URL pointing to the user's avatar with a specific border style, used for visual customization.
+- **flag**: The country code representing the user's national flag.
+- **birthday**: The user's birth year, used to calculate age or other age-based information.
+- **sinceExperience**: The year the user started gaining experience as a developer, often displayed to indicate professional longevity.
+- **infoSubTitle**: A descriptive subtitle that complements the user's information or bio.
+- **badgeTitle**: The title or designation associated with the user's badge, representing achievements or roles.
+- **badgeEXP**: The experience points or value linked to the user's badge, typically indicating progress or milestones.
+- **badgeIcon**: URL linking to the visual representation of the badge icon.
+- **twitterLink**: The URL directing to the user's Twitter profile for social connectivity.
+- **awardIconLink**: URL for the icon representing the user's awards or achievements.
+- **perfilIconLink**: URL linking to the user's profile icon or page for detailed personal information.
+- **urlAvatar**: URL pointing to the user's avatar image, often a GitHub profile picture.
+- **nickname**: The user's nickname or display name, usually fetched from GitHub data.
+- **location**: The geographical location of the user, as retrieved from their GitHub profile.
+- **infoTitle**: A concise title summarizing the user's information or professional tagline.
+- **githubLink**: URL linking to the user's GitHub profile, providing access to repositories and activities.
+  
+---
+
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add your update message here"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. Open a pull request.
 
 # 📕 License
 
