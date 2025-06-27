@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const SteamDetails = styled.div`
-@import url('https://fonts.cdnfonts.com/css/motiva-sans');
-
     .background {
         width: 100%;
         height: 100vh;
@@ -24,7 +22,7 @@ const SteamDetails = styled.div`
         content: '';
         background: var(--transparent);
         color: var(--white);
-        font-family: "Motiva Sans", Sans-serif;
+        font-family: "Motiva Sans", sans-serif;
         padding: 2rem;
 
         .header {
@@ -33,7 +31,7 @@ const SteamDetails = styled.div`
             .avatar {
                 width: 11rem;
                 height: 11rem;
-                
+
                 img {
                     width: 100%;
                     height: 100%;
@@ -48,17 +46,18 @@ const SteamDetails = styled.div`
                     margin-top: -1rem;
                 }
             }
-            
+
             .nickname {
                 line-height: 40px;
                 color: var(--white);
                 padding: 0 2rem;
-                width: 22.5rem;
+                width: 25rem;
 
                 h2 {
                     font-weight: 100;
-                    font-family: "Motiva Sans", Sans-serif;
+                    font-family: "Motiva Sans", sans-serif;
                     margin-top: -0.3rem;
+                    max-width: 23.125rem;
                 }
 
                 .subnick {
@@ -71,6 +70,9 @@ const SteamDetails = styled.div`
 
                     .city {
                         margin-left: 0.7rem;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                 }
 
@@ -106,7 +108,7 @@ const SteamDetails = styled.div`
             }
 
             .level {
-                margin: 0.5rem 0 0 4rem;
+                margin: 0.5rem 0 0 1.5rem;
                 width: 17rem;
 
                 h2 {
@@ -134,7 +136,7 @@ const SteamDetails = styled.div`
                             width: 3rem;
                         }
                     }
-                    
+
                     .rightContent {
                         display: flex;
                         flex-direction: column;
@@ -202,7 +204,7 @@ const SteamDetails = styled.div`
         content: '';
         background: var(--transparent);
         color: var(--white);
-        font-family: "Motiva Sans", Sans-serif;
+        font-family: "Motiva Sans", sans-serif;
         padding: 0rem 1rem;
         margin-bottom: 1rem;
 
@@ -212,7 +214,7 @@ const SteamDetails = styled.div`
             max-width: 65%;
             padding-right: 1rem;
             margin-top: -1rem;
-            
+
             .group {
                 padding: 1rem 0;
 
@@ -225,7 +227,7 @@ const SteamDetails = styled.div`
 
                 h3 {
                     background: var(--transparent-light);
-                    
+
                     border-radius: 7px 7px 0 0;
                 }
 
@@ -233,6 +235,11 @@ const SteamDetails = styled.div`
                     background: var(--transparent);
                     border-radius: 0 0 7px 7px;
                     margin-bottom: 1rem;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 6;
+                    -webkit-box-orient: vertical;
                 }
 
                 .groupDetails {
@@ -243,7 +250,7 @@ const SteamDetails = styled.div`
 
                     span {
                         margin: 0.65rem 0;
-                        
+
                         a {
                             color: var(--white);
                             text-decoration: none;
@@ -287,7 +294,7 @@ const SteamDetails = styled.div`
                             backdrop-filter: blur(20px);
                             color: var(--white);
                             font-size: 1.2rem;
-                            font-family: "Motiva Sans", Sans-serif;
+                            font-family: "Motiva Sans", sans-serif;
                             border: 1px solid var(--gray);
 
                             &:hover {
@@ -309,7 +316,7 @@ const SteamDetails = styled.div`
 
             h2 {
                 font-weight: 100;
-                font-family: "Motiva Sans", Sans-serif;
+                font-family: "Motiva Sans", sans-serif;
                 color: var(--theme);
             }
 
@@ -336,13 +343,13 @@ const SteamDetails = styled.div`
 
                     span {
                         margin-left: 5px;
-                        font-family: "Motiva Sans", Sans-serif;
+                        font-family: "Motiva Sans", sans-serif;
                         font-weight: 100;
                         color: var(--gray);
                         font-size: 30px;
                     }
                 }
-                
+
                 .badges {
                     img {
                         width: 3.5rem;
@@ -364,16 +371,18 @@ const SteamDetails = styled.div`
     .copyright {
         display: flex;
         justify-content: center;
-        
+
         a {
             text-decoration: none;
             color: var(--white);
-            font-family: "Motiva Sans", Sans-serif;
+            font-family: "Motiva Sans", sans-serif;
             font-weight: 100;
             font-size: 1rem;
             margin-bottom: 1rem;
-        }   
+        }
     }
 `
 
 export default SteamDetails
+
+

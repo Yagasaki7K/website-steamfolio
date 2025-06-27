@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SteamDetails from "./SteamDetails";
+import SteamDetails from "./steamDetails";
 import { getLevelByGPQ } from "./utils/getLevelByGPQ";
 import axios from "axios";
 
@@ -140,35 +140,35 @@ function App() {
           try {
             const response = await fetch('https://raw.githubusercontent.com/Yagasaki7K/website-yagasaki/refs/heads/main/article.xml'); // Substitua pela URL real
             const xmlData = await response.text();
-    
+
             // Usando DOMParser para analisar o XML no navegador
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlData, 'application/xml');
-    
+
             // Acessando os itens do feed RSS
             const items = xmlDoc.getElementsByTagName('item');
             const fetchedArticles: Article[] = [];
-    
+
             for (let i = 0; i < items.length; i++) {
               const item = items[i];
               const title = item.getElementsByTagName('title')[0].textContent || '';
               const link = item.getElementsByTagName('link')[0].textContent || '';
               const pubDate = new Date(item.getElementsByTagName('pubDate')[0].textContent || '');
               const description = item.getElementsByTagName('description')[0].textContent || '';
-    
+
               fetchedArticles.push({ title, link, pubDate, description });
             }
-    
+
             // Ordena os artigos por data (mais recente primeiro)
             fetchedArticles.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
-    
+
             // Seleciona os quatro artigos mais recentes
             setArticles(fetchedArticles.slice(0, 4));
           } catch (error) {
             console.error('Erro ao processar o arquivo XML:', error);
           }
         };
-    
+
         fetchArticles();
     }, []);
 
@@ -273,7 +273,8 @@ function App() {
                     <div className="subgroups">
                         <div className="group">
                             <h3>About</h3>
-                            <p><img src="https://github.com/tairosonloa/tairosonloa/blob/main/assets/wave.gif?raw=true" width="15px" /> Hi, I'm <b>Anderson Marlon</b>, a Software Developer with experience building systems and applications scalable in the industries of Chatbot, Artificial Intelligence, Financial Technology (Fintech), Affiliates, Brewery, Health, Journalism, Sustainability, Sales / Entrepreneurship, Podcasts, Advocate, Solutions Tech, Referral Marketing, Government Solutions Assistance and Electronic Sport Scenario & Black Belt Taekwondo @ Campinas Fighters.</p>
+                            <p><img src="https://github.com/tairosonloa/tairosonloa/blob/main/assets/wave.gif?raw=true" width="15px" /> Hi, I'm <b>Anderson Marlon</b>, a Software Developer, Fullstack Developer and Front-end Developer with experience in Javascript, Typescript, React.js, Next.js, Vite, Sass, Redux, RegEx, UI/UX, Responsive Design, Firebase, Supabase, Hasura, SQL Lite, MySQL, PostgreSQL, GraphQL, Jest, Node.js, Express, Fastify, NestJS, Bun.js, Whatsapp API, Rocketchat, Serverless, Microservices and more …
+                            </p>
 
                             <h3>Technologies</h3>
                             <div className="groupDetails">
