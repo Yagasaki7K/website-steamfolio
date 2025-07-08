@@ -381,8 +381,6 @@ const SteamDetails = styled.div`
             margin-bottom: 1rem;
         }
     }
-`
+`;
 
-export default SteamDetails
-
-
+export default SteamDetails;
