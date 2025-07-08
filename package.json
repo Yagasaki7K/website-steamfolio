@@ -9,9 +9,10 @@
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
 		"yagasaki": "bun update",
-		"create:mylint": "bunx --bun biome init && mylint",
+		"create:mylint": "bunx --bun biome init && bun mylint",
 		"mylint": "bunx biome format --write",
-		"commit": "git pull && bun run vercel && bun mylint && read -p 'Descriptions Commit: ' message && git add . && echo -n \"$message - \" && node getTime.js | xargs -I {} git commit -m \"$message - {}\" && git push"
+		"commit": "git pull && bun run vercel && bun mylint && read -p 'Descriptions Commit: ' message && git add . && echo -n \"$message - \" && node getTime.js | xargs -I {} git commit -m \"$message - {}\" && git push",
+		"clean": "rm -rf node_modules && bun install"
 	},
 	"dependencies": {
 		"@types/bun": "^1.2.17",
