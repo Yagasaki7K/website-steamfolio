@@ -159,9 +159,7 @@ function App() {
 	useEffect(() => {
 		const fetchArticles = async () => {
 			try {
-				const response = await fetch(
-					"https://raw.githubusercontent.com/Yagasaki7K/website-yagasaki/refs/heads/main/article.xml",
-				); // Substitua pela URL real
+				const response = await fetch("https://yagasaki.vercel.app/api/rss"); // Substitua pela URL real
 				const xmlData = await response.text();
 
 				// Usando DOMParser para analisar o XML no navegador
@@ -174,13 +172,15 @@ function App() {
 
 				for (let i = 0; i < items.length; i++) {
 					const item = items[i];
-					const title = item.getElementsByTagName("title")[0].textContent || "";
-					const link = item.getElementsByTagName("link")[0].textContent || "";
-					const pubDate = new Date(
-						item.getElementsByTagName("pubDate")[0].textContent || "",
-					);
+
+					const title =
+						item.getElementsByTagName("title")[0]?.textContent || "";
+					const link = item.getElementsByTagName("link")[0]?.textContent || "";
+					const pubDateText =
+						item.getElementsByTagName("pubDate")[0]?.textContent;
+					const pubDate = pubDateText ? new Date(pubDateText) : new Date();
 					const description =
-						item.getElementsByTagName("description")[0].textContent || "";
+						item.getElementsByTagName("description")[0]?.textContent || "";
 
 					fetchedArticles.push({ title, link, pubDate, description });
 				}

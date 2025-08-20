@@ -197,7 +197,7 @@ const SteamDetails = styled.div`
 
     .body {
         width: 61rem;
-        height: 44rem;
+        height: 45rem;
         margin: 0 auto;
         display: flex;
         flex-direction: row;
