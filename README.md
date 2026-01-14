@@ -27,222 +27,337 @@
   </sub>
 </div>
 
-# 📌 Table of Contents
+## Language navigation
 
-- [📌 Table of Contents](#-table-of-contents)
-- [👀 Demo Website](#-demo-website)
-- [💻 Technologies](#-technologies)
-- [Application Documentation](#application-documentation)
-  - [Overview](#overview)
-  - [Key Features](#key-features)
-  - [Application Structure](#application-structure)
-    - [Components](#components)
-    - [Utility Functions](#utility-functions)
-  - [API Integration](#api-integration)
-    - [GitHub API](#github-api)
-    - [Blog Feed](#blog-feed)
-  - [Environment Variables](#environment-variables)
-  - [How to Run the Application](#how-to-run-the-application)
-    - [Prerequisites](#prerequisites)
-    - [Steps](#steps)
-  - [File Structure](#file-structure)
-  - [Customization](#customization)
-  - [Contributing](#contributing)
-- [📕 License](#-license)
-
-# 👀 Demo Website
-
-👉  Demo: https://steamfolio.vercel.app/
-
-# 💻 Technologies
-
-This project was made using the follow technologies:
-
-* Bun
-* ReactJS
-* Typescript
-* Styled Components
-* Vite
-* Steam API
-* GitHub API
-
-If you want something, wait for `yarn build` to be obeyed, and after that open a little change decision!
-
-# Application Documentation
-
-This documentation provides an overview of the application and its functionalities to help developers understand its structure and make modifications as needed.
+- [English](#english)
+- [Português do Brasil](#portugues-do-brasil)
 
 ---
+
+# English
+
+## Table of contents
+
+- [Overview](#overview)
+- [Demo](#demo)
+- [Features](#features)
+- [Tech stack](#tech-stack)
+- [Project structure](#project-structure)
+- [API integrations](#api-integrations)
+- [Configuration](#configuration)
+- [Getting started](#getting-started)
+- [Available scripts](#available-scripts)
+- [Customization guide](#customization-guide)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Overview
-This React-based application fetches and displays data from the GitHub API and an XML-based blog feed. It provides an interactive interface showcasing user information, repositories, achievements, and blog articles. It also offers customizable visual elements such as avatars and badges.
 
----
+Steamfolio is a personal profile landing page inspired by the Steam UI. It fetches GitHub data, displays stats and badges, and optionally consumes a blog RSS feed to show recent articles. The project is built with React, Vite, and styled-components, and is intended to be simple to fork and customize.
 
-## Key Features
+## Demo
 
-1. **GitHub Integration**:
-   - Fetches user details, repositories, stars, and commit counts using the GitHub API.
-   - Displays the most-used programming language based on repositories.
+- https://steamfolio.vercel.app/
 
-2. **Blog Integration**:
-   - Parses an XML feed to display the latest blog articles.
-   - Supports sorting and filtering of articles.
+## Features
 
-3. **Dynamic User Profile**:
-   - Customizable avatar, nickname, and achievements.
-   - Real-time badges and stats fetched from APIs.
+- GitHub profile and repository stats.
+- Visual badges and a Steam-like layout.
+- Optional RSS feed integration for blog posts.
+- Easily configurable profile data and assets.
 
-4. **Interactive UI**:
-   - Buttons and links to navigate to user social profiles and repositories.
-   - Dynamically styled components for a modern look.
+## Tech stack
 
----
+- React
+- TypeScript
+- Vite
+- styled-components
+- Bun (optional), npm, or Yarn for package management
 
-## Application Structure
+## Project structure
 
-### Components
-
-1. **`App`**:
-   - The main component that fetches and displays data.
-   - Uses React hooks like `useState` and `useEffect` to manage state and side effects.
-
-2. **`SteamDetails`**:
-   - A wrapper component for the UI layout and design.
-
-### Utility Functions
-
-1. **`getLevelByGPQ`**:
-   - A utility function to calculate user levels based on their GitHub stats.
-
-2. **`fetchData`**:
-   - Fetches GitHub user information and repositories.
-   - Calculates total stars, commits, and programming language usage.
-
-3. **`fetchArticles`**:
-   - Fetches and parses an XML feed to extract blog articles.
-   - Sorts and displays the four latest articles.
-
----
-
-## API Integration
-
-### GitHub API
-- **Endpoints Used**:
-  1. `https://api.github.com/users/{username}` - Fetches user details.
-  2. `https://api.github.com/users/{username}/repos` - Fetches repositories.
-  3. `https://api.github.com/search/commits` - Fetches total commits.
-
-- **Headers**:
-  ```json
-  {
-    "Authorization": "Bearer <github_api_key>",
-    "Accept": "application/vnd.github.cloak-preview"
-  }
-  ```
-
-### Blog Feed
-- **Endpoint**: 
-  `https://raw.githubusercontent.com/Yagasaki7K/website-yagasaki/refs/heads/main/article.xml`
-
-- **Parsing**:
-  - Uses the `DOMParser` to parse the XML.
-  - Extracts `title`, `link`, `pubDate`, and `description` fields.
-
-This can be removed or changed to whatever XML is needed, following the practices of each blog/site.
-
----
-
-## Environment Variables
-
-1. `VITE_GITHUB_API_KEY` - The GitHub API token for authentication.
-
----
-
-## How to Run the Application
-
-### Prerequisites
-1. **Node.js** and **npm/yarn** or **Bun** installed.
-2. A valid GitHub API token.
-
-### Steps
-1. Clone the repository:
-   ```bash
-   git clone git@github.com:Yagasaki7K/website-steamfolio.git
-   ```
-2. Install dependencies:
-   ```bash
-   npm install or yarn or bun install
-   ```
-3. Create a `.env` file and add the GitHub API token:
-   ```env
-   VITE_GITHUB_API_KEY=<your_github_api_key>
-   ```
-4. Start the application:
-   ```bash
-   npm run dev or yarn dev or bun run dev
-   ```
-5. Access the application at `http://localhost:3000`.
-
----
-
-## File Structure
-```plaintext
+```
 src/
-├── components/
-│   └── SteamDetails.tsx  # Layout wrapper component
+├── App.tsx                # Main application logic and data fetching
+├── steamDetails.tsx       # Layout component for the Steam-like UI
 ├── utils/
-│   └── getLevelByGPQ.ts  # Utility function for level calculation
-├── App.tsx               # Main application logic
-└── styles/               # CSS/SCSS files for styling
+│   └── getLevelByGPQ.ts   # Helper to render a badge based on commit count
+└── styles/                # Global styles and component styling
 ```
 
----
+## API integrations
 
-## Customization
+### GitHub API
 
-- **infoGithub**: Contains detailed information about the user fetched from the GitHub API, including name, bio, location, and more.
-- **userGitHub**: The GitHub username used to fetch information and data for the specified user.
-- **subnick**: A subtitle or additional alias for the user, providing extra personalization.
-- **avatarBorder**: URL pointing to the user's avatar with a specific border style, used for visual customization.
-- **flag**: The country code representing the user's national flag.
-- **birthday**: The user's birth year, used to calculate age or other age-based information.
-- **sinceExperience**: The year the user started gaining experience as a developer, often displayed to indicate professional longevity.
-- **infoSubTitle**: A descriptive subtitle that complements the user's information or bio.
-- **badgeTitle**: The title or designation associated with the user's badge, representing achievements or roles.
-- **badgeEXP**: The experience points or value linked to the user's badge, typically indicating progress or milestones.
-- **badgeIcon**: URL linking to the visual representation of the badge icon.
-- **twitterLink**: The URL directing to the user's Twitter profile for social connectivity.
-- **awardIconLink**: URL for the icon representing the user's awards or achievements.
-- **perfilIconLink**: URL linking to the user's profile icon or page for detailed personal information.
-- **urlAvatar**: URL pointing to the user's avatar image, often a GitHub profile picture.
-- **nickname**: The user's nickname or display name, usually fetched from GitHub data.
-- **location**: The geographical location of the user, as retrieved from their GitHub profile.
-- **infoTitle**: A concise title summarizing the user's information or professional tagline.
-- **githubLink**: URL linking to the user's GitHub profile, providing access to repositories and activities.
-  
----
+The app uses the GitHub REST API to read profile data, repositories, and commit totals. Requests are authenticated using a personal access token (PAT) to increase rate limits.
+
+Endpoints in use:
+
+- `GET https://api.github.com/users/{username}`
+- `GET https://api.github.com/users/{username}/repos?sort=updated`
+- `GET https://api.github.com/search/commits?q=author:{username} is:merge`
+
+Required header:
+
+```
+Authorization: Bearer <token>
+```
+
+### RSS feed
+
+The app fetches an RSS feed URL and parses it in the browser with `DOMParser`. The default URL in the project points to the author’s blog, and you can replace it with your own feed.
+
+## Configuration
+
+Create a `.env` file in the project root:
+
+```
+VITE_GITHUB_API_KEY=your_github_token
+```
+
+Notes:
+
+- The token only needs read access.
+- If you do not provide a token, the API may rate-limit you quickly, especially during development.
+
+## Getting started
+
+### Prerequisites
+
+- Node.js 18+ or Bun
+- Git
+
+### Install and run
+
+Using npm:
+
+```
+npm install
+npm run dev
+```
+
+Using Yarn:
+
+```
+yarn
+
+yarn dev
+```
+
+Using Bun:
+
+```
+bun install
+bun run dev
+```
+
+The Vite dev server will run on `http://localhost:5173` by default.
+
+## Available scripts
+
+- `dev`: start the Vite development server
+- `preview`: preview a production build
+- `lint`: run ESLint
+- `vercel`: run `tsc` and `vite build`
+- `clean`: remove `node_modules` and reinstall dependencies with Bun
+
+## Customization guide
+
+Most of the content is configured in `src/App.tsx`. Typical updates:
+
+- `userGitHub`: GitHub username used for API calls and links.
+- `subnick`, `infoSubTitle`, `badgeTitle`, `badgeEXP`: text labels shown in the UI.
+- `avatarBorder`, `fixedAvatar`, `badgeIcon`, `awardIconLink`, `perfilIconLink`: image and link assets.
+- `flag`, `birthday`, `sinceExperience`: used for badges and profile info.
+- RSS feed URL: replace the URL inside the `fetchArticles` function to point to your blog.
+
+When adjusting assets, verify that images are available and meet your desired size and format.
 
 ## Contributing
 
 1. Fork the repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add your update message here"
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. Open a pull request.
+2. Create a branch for your change:
+    ```
+    git checkout -b feature/my-change
+    ```
+3. Make your updates and ensure the project builds and lint passes.
+4. Commit your work with a clear message:
+    ```
+    git commit -m "Describe your change"
+    ```
+5. Push your branch and open a pull request.
 
-# 📕 License
+When opening a pull request, include:
 
-Released in 2024
+- A summary of what changed.
+- Screenshots for visual updates.
+- Any relevant testing details.
 
-Made by [Anderson Marlon](https://github.com/Yagasaki7K)
-This project is under the [MIT license](./LICENSE).
+## License
+
+MIT. See `LICENCE`.
+
+---
+
+# Português do Brasil
+
+## Sumário
+
+- [Visão geral](#visao-geral)
+- [Demo](#demo-1)
+- [Funcionalidades](#funcionalidades)
+- [Stack tecnológica](#stack-tecnologica)
+- [Estrutura do projeto](#estrutura-do-projeto)
+- [Integrações de API](#integracoes-de-api)
+- [Configuração](#configuracao)
+- [Como rodar](#como-rodar)
+- [Scripts disponíveis](#scripts-disponiveis)
+- [Guia de personalização](#guia-de-personalizacao)
+- [Como contribuir](#como-contribuir)
+- [Licença](#licenca)
+
+## Visão geral
+
+Steamfolio e uma landing page de perfil pessoal inspirada na interface da Steam. Ela busca dados do GitHub, exibe estatisticas e badges, e opcionalmente consome um feed RSS para mostrar artigos recentes. O projeto usa React, Vite e styled-components e foi pensado para ser facil de clonar e personalizar.
+
+## Demo
+
+- https://steamfolio.vercel.app/
+
+## Funcionalidades
+
+- Estatisticas de perfil e repositorios do GitHub.
+- Badges visuais e layout no estilo Steam.
+- Integracao opcional com RSS para posts do blog.
+- Dados de perfil e assets configuraveis.
+
+## Stack tecnológica
+
+- React
+- TypeScript
+- Vite
+- styled-components
+- Bun (opcional), npm ou Yarn para gerenciamento de pacotes
+
+## Estrutura do projeto
+
+```
+src/
+├── App.tsx                # Logica principal e chamadas de API
+├── steamDetails.tsx       # Layout principal da interface
+├── utils/
+│   └── getLevelByGPQ.ts   # Helper para renderizar badge por commits
+└── styles/                # Estilos globais e componentes
+```
+
+## Integrações de API
+
+### GitHub API
+
+A aplicacao usa a API REST do GitHub para dados de perfil, repositorios e total de commits. As requisicoes sao autenticadas com um token pessoal (PAT) para aumentar o limite de requisicoes.
+
+Endpoints usados:
+
+- `GET https://api.github.com/users/{username}`
+- `GET https://api.github.com/users/{username}/repos?sort=updated`
+- `GET https://api.github.com/search/commits?q=author:{username} is:merge`
+
+Header obrigatorio:
+
+```
+Authorization: Bearer <token>
+```
+
+### RSS feed
+
+A aplicacao busca uma URL de RSS e faz o parse no navegador com `DOMParser`. A URL padrao aponta para o blog do autor, mas voce pode substituir pela sua propria fonte.
+
+## Configuração
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```
+VITE_GITHUB_API_KEY=seu_github_token
+```
+
+Observacoes:
+
+- O token precisa apenas de acesso de leitura.
+- Sem token, a API pode limitar requisicoes rapidamente durante o desenvolvimento.
+
+## Como rodar
+
+### Pré-requisitos
+
+- Node.js 18+ ou Bun
+- Git
+
+### Instalar e executar
+
+Usando npm:
+
+```
+npm install
+npm run dev
+```
+
+Usando Yarn:
+
+```
+yarn
+
+yarn dev
+```
+
+Usando Bun:
+
+```
+bun install
+bun run dev
+```
+
+O servidor do Vite roda em `http://localhost:5173` por padrao.
+
+## Scripts disponíveis
+
+- `dev`: inicia o servidor de desenvolvimento do Vite
+- `preview`: visualiza o build de producao
+- `lint`: executa o ESLint
+- `vercel`: roda `tsc` e `vite build`
+- `clean`: remove `node_modules` e reinstala dependencias com Bun
+
+## Guia de personalização
+
+A maior parte do conteudo fica em `src/App.tsx`. Mudancas comuns:
+
+- `userGitHub`: usuario do GitHub usado nas chamadas e links.
+- `subnick`, `infoSubTitle`, `badgeTitle`, `badgeEXP`: textos exibidos na interface.
+- `avatarBorder`, `fixedAvatar`, `badgeIcon`, `awardIconLink`, `perfilIconLink`: imagens e links.
+- `flag`, `birthday`, `sinceExperience`: usados para badges e informacoes do perfil.
+- URL do RSS: altere dentro da funcao `fetchArticles` para o seu blog.
+
+Ao trocar assets, confirme se as imagens estao acessiveis e com o tamanho adequado.
+
+## Como contribuir
+
+1. Faca um fork do repositorio.
+2. Crie uma branch para sua alteracao:
+    ```
+    git checkout -b feature/minha-mudanca
+    ```
+3. Faca as alteracoes e garanta que o projeto compila e o lint passa.
+4. Commit suas mudancas:
+    ```
+    git commit -m "Descreva sua alteracao"
+    ```
+5. Envie sua branch e abra um pull request.
+
+Ao abrir o pull request, inclua:
+
+- Um resumo do que mudou.
+- Screenshots para mudancas visuais.
+- Informacoes de testes relevantes.
+
+## Licença
+
+MIT. Veja `LICENCE`.
