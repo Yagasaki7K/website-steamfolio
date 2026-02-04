@@ -4,13 +4,13 @@ const SteamDetails = styled.div`
     .background {
         width: 100%;
         height: 100vh;
-        /* background: url(background-cuttie.gif); */
-        background: url(background-winter.gif);
+        background: url(background-cuttie.gif);
+        /* background: url(background-winter.gif); */
         position: fixed;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        content: '';
+        content: "";
         z-index: -1;
     }
 
@@ -19,7 +19,7 @@ const SteamDetails = styled.div`
         width: 61rem;
         margin: 0 auto;
         display: flex;
-        content: '';
+        content: "";
         background: var(--transparent);
         color: var(--white);
         font-family: "Motiva Sans", sans-serif;
@@ -81,7 +81,8 @@ const SteamDetails = styled.div`
                     flex-direction: column;
                     max-width: 300px;
 
-                    p, i {
+                    p,
+                    i {
                         line-height: 23px;
                     }
 
@@ -175,7 +176,8 @@ const SteamDetails = styled.div`
                         }
                     }
 
-                    .award, .avatar {
+                    .award,
+                    .avatar {
                         padding: 0.3rem;
                         margin-right: 0.3rem;
                         background: var(--transparent);
@@ -201,7 +203,7 @@ const SteamDetails = styled.div`
         margin: 0 auto;
         display: flex;
         flex-direction: row;
-        content: '';
+        content: "";
         background: var(--transparent);
         color: var(--white);
         font-family: "Motiva Sans", sans-serif;
@@ -218,7 +220,9 @@ const SteamDetails = styled.div`
             .group {
                 padding: 1rem 0;
 
-                h3, p, .groupDetails {
+                h3,
+                p,
+                .groupDetails {
                     padding: 1rem;
                     width: 100%;
                     backdrop-filter: blur(20px);
@@ -309,7 +313,7 @@ const SteamDetails = styled.div`
 
         .sidebar {
             width: 40%;
-            height: 43rem;
+            height: 43.6rem;
             background-color: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(20px);
             padding: 1rem;
@@ -327,6 +331,7 @@ const SteamDetails = styled.div`
             .links {
                 display: flex;
                 flex-direction: column;
+                padding: 0;
 
                 .link {
                     &:hover {
