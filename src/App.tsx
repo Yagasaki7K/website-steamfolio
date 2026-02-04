@@ -205,7 +205,7 @@ function App() {
     const sinceExperience = 2020;
     const infoSubTitle = "Transforming code into solutions";
 
-    const badgeTitle = "Mid Software Developer";
+    const badgeTitle = "Software Engineer II";
     const badgeEXP = "12,649";
     const badgeIcon = "https://community.cloudflare.steamstatic.com/public/images/badges/30_steamawardnominations/level04_80.png";
     // Default
