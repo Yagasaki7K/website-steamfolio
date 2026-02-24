@@ -218,7 +218,7 @@ MIT. See `LICENCE`.
 
 ## Visão geral
 
-Steamfolio e uma landing page de perfil pessoal inspirada na interface da Steam. Ela busca dados do GitHub, exibe estatisticas e badges, e opcionalmente consome um feed RSS para mostrar artigos recentes. O projeto usa React, Vite e styled-components e foi pensado para ser facil de clonar e personalizar.
+Steamfolio é uma landing page de perfil pessoal inspirada na interface da Steam. Ela busca dados do GitHub, exibe estatisticas e badges, e opcionalmente consome um feed RSS para mostrar artigos recentes. O projeto usa React, Vite e styled-components e foi pensado para ser facil de clonar e personalizar.
 
 ## Demo
 
@@ -226,10 +226,10 @@ Steamfolio e uma landing page de perfil pessoal inspirada na interface da Steam.
 
 ## Funcionalidades
 
-- Estatisticas de perfil e repositorios do GitHub.
+- Estatisticas de perfil e repositórios do GitHub.
 - Badges visuais e layout no estilo Steam.
-- Integracao opcional com RSS para posts do blog.
-- Dados de perfil e assets configuraveis.
+- Integração opcional com RSS para posts do blog.
+- Dados de perfil e assets configuráveis.
 
 ## Stack tecnológica
 
@@ -254,7 +254,7 @@ src/
 
 ### GitHub API
 
-A aplicacao usa a API REST do GitHub para dados de perfil, repositorios e total de commits. As requisicoes sao autenticadas com um token pessoal (PAT) para aumentar o limite de requisicoes.
+A aplicação usa a API REST do GitHub para dados de perfil, repositórios e total de commits. As requisições sao autenticadas com um token pessoal (PAT) para aumentar o limite de requisições.
 
 Endpoints usados:
 
@@ -270,7 +270,7 @@ Authorization: Bearer <token>
 
 ### RSS feed
 
-A aplicacao busca uma URL de RSS e faz o parse no navegador com `DOMParser`. A URL padrao aponta para o blog do autor, mas voce pode substituir pela sua propria fonte.
+A aplicação busca uma URL de RSS e faz o parse no navegador com `DOMParser`. A URL padrão aponta para o blog do autor, mas você pode substituir pela sua propria fonte.
 
 ## Configuração
 
@@ -283,7 +283,7 @@ VITE_GITHUB_API_KEY=seu_github_token
 Observacoes:
 
 - O token precisa apenas de acesso de leitura.
-- Sem token, a API pode limitar requisicoes rapidamente durante o desenvolvimento.
+- Sem token, a API pode limitar requisições rapidamente durante o desenvolvimento.
 
 ## Como rodar
 
@@ -316,21 +316,21 @@ bun install
 bun run dev
 ```
 
-O servidor do Vite roda em `http://localhost:5173` por padrao.
+O servidor do Vite roda em `http://localhost:5173` por padrão.
 
 ## Scripts disponíveis
 
 - `dev`: inicia o servidor de desenvolvimento do Vite
-- `preview`: visualiza o build de producao
+- `preview`: visualiza o build de produção
 - `lint`: executa o ESLint
 - `vercel`: roda `tsc` e `vite build`
-- `clean`: remove `node_modules` e reinstala dependencias com Bun
+- `clean`: remove `node_modules` e reinstala dependências com Bun
 
 ## Guia de personalização
 
-A maior parte do conteudo fica em `src/App.tsx`. Mudancas comuns:
+A maior parte do conteúdo fica em `src/App.tsx`. Mudanças comuns:
 
-- `userGitHub`: usuario do GitHub usado nas chamadas e links.
+- `userGitHub`: usuário do GitHub usado nas chamadas e links.
 - `subnick`, `infoSubTitle`, `badgeTitle`, `badgeEXP`: textos exibidos na interface.
 - `avatarBorder`, `fixedAvatar`, `badgeIcon`, `awardIconLink`, `perfilIconLink`: imagens e links.
 - `flag`, `birthday`, `sinceExperience`: usados para badges e informacoes do perfil.
@@ -340,13 +340,13 @@ Ao trocar assets, confirme se as imagens estao acessiveis e com o tamanho adequa
 
 ## Como contribuir
 
-1. Faca um fork do repositorio.
-2. Crie uma branch para sua alteracao:
+1. Faca um fork do repositório.
+2. Crie uma branch para sua alteração:
     ```
     git checkout -b feature/minha-mudanca
     ```
-3. Faca as alteracoes e garanta que o projeto compila e o lint passa.
-4. Commit suas mudancas:
+3. Faça as alterações e garanta que o projeto compila e o lint passa.
+4. Commit suas mudanças:
     ```
     git commit -m "Descreva sua alteracao"
     ```
@@ -355,8 +355,8 @@ Ao trocar assets, confirme se as imagens estao acessiveis e com o tamanho adequa
 Ao abrir o pull request, inclua:
 
 - Um resumo do que mudou.
-- Screenshots para mudancas visuais.
-- Informacoes de testes relevantes.
+- Screenshots para mudanças visuais.
+- Informações de testes relevantes.
 
 ## Licença
 
