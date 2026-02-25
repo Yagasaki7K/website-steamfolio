@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import SteamDetails from "./steamDetails";
 import { getLevelByGPQ } from "./utils/getLevelByGPQ";
 import axios from "axios";
+import { SafeImage } from "./components/SafeImage";
+import { SeoMeta } from "./components/SeoMeta";
 
 interface Article {
     title: string;
@@ -134,6 +136,7 @@ function App() {
     const [userInfo, setUserInfo] = useState<UserGitHub | undefined>();
     const [userRepos, setUserRepos] = useState<UserRepos | undefined>();
     const [loading, setLoading] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const githubApiKey = import.meta.env.VITE_GITHUB_API_KEY || "";
@@ -226,17 +229,27 @@ function App() {
 
     console.log(userRepos, userInfo);
 
-    return loading ? (
-        <p>Loading ...</p>
-    ) : (
+    const pageTitle = nickname ? `${nickname} | Steamfolio` : "Steamfolio";
+    const pageDescription = infoTitle || "Steam-style portfolio with GitHub profile data and latest articles.";
+    const pageImage = fixedAvatar;
+
+    return (
         <SteamDetails>
+            <SeoMeta title={pageTitle} description={pageDescription} image={pageImage} url={githubLink} />
+
             <div className="background"></div>
+
+            {loading && <div className="loadingOverlay">Loading profile data...</div>}
+
+            <button className="mobileMenuButton" onClick={() => setMobileMenuOpen((currentState) => !currentState)}>
+                {mobileMenuOpen ? "Close Menu" : "Open Menu"}
+            </button>
 
             <div className="content">
                 <div className="header">
                     <div className="avatar">
-                        <img src={fixedAvatar} alt="" />
-                        <img className="border" src={avatarBorder} alt="" />
+                        <SafeImage src={fixedAvatar} alt="Profile avatar" fallbackText="Avatar" />
+                        <SafeImage className="border" src={avatarBorder} alt="Avatar border" fallbackText="Border" />
                     </div>
 
                     <div className="nickname">
@@ -245,7 +258,14 @@ function App() {
                         <div className="subnick">
                             <p>{subnick}</p>
                             <p className="city">
-                                <img src={"https://community.cloudflare.steamstatic.com/public/images/countryflags/" + flag + ".gif"} /> {location}
+                                <SafeImage
+                                    src={"https://community.cloudflare.steamstatic.com/public/images/countryflags/" + flag + ".gif"}
+                                    alt={`Country flag ${flag}`}
+                                    fallbackText={flag.toUpperCase()}
+                                    width={18}
+                                    height={13}
+                                />{" "}
+                                {location}
                             </p>
                         </div>
 
@@ -263,7 +283,7 @@ function App() {
 
                         <div className="badge">
                             <div className="leftContent">
-                                <img src={badgeIcon} alt="BadgeIcon" />
+                                <SafeImage src={badgeIcon} alt="BadgeIcon" fallbackText="Badge" width={48} height={48} />
                             </div>
 
                             <div className="rightContent">
@@ -275,10 +295,10 @@ function App() {
                         <div className="buttons">
                             <button onClick={() => (window.location.href = twitterLink)}>Send Friend Request</button>
                             <a href={awardIconLink} target="_blank" rel="noreferrer">
-                                <img className="award" src="award_icon.svg" alt="" />
+                                <SafeImage className="award" src="award_icon.svg" alt="Awards" fallbackText="Award" width={24} height={32} />
                             </a>
                             <a href={perfilIconLink} target="_blank" rel="noreferrer">
-                                <img className="avatar" src="equipped_items_icon.svg" alt="" />
+                                <SafeImage className="avatar" src="equipped_items_icon.svg" alt="Profile" fallbackText="Profile" width={32} height={32} />
                             </a>
                             <button onClick={() => (window.location.href = githubLink)}>...</button>
                         </div>
@@ -290,7 +310,13 @@ function App() {
                     <div className="group">
                         <h3>About</h3>
                         <p>
-                            <img src="https://github.com/tairosonloa/tairosonloa/blob/main/assets/wave.gif?raw=true" width="15px" /> Hi, I'm{" "}
+                            <SafeImage
+                                src="https://github.com/tairosonloa/tairosonloa/blob/main/assets/wave.gif?raw=true"
+                                width="15px"
+                                alt="Waving hand"
+                                fallbackText="👋"
+                            />{" "}
+                            Hi, I'm{" "}
                             <b>Anderson Marlon</b>, AKA Yagasaki, I'm Software Engineer @ R2A, Software Engineer and CTO @ Engide and Founder and
                             Community Manager @ KalifyInc, feel free to enjoy to my open source community.
                         </p>
@@ -298,12 +324,12 @@ function App() {
                         <h3>Technologies</h3>
                         <div className="groupDetails">
                             <div className="badges">
-                                <img src="/js.png" alt="BadgeIcon" title="Javascript Developer" />
-                                <img src="/ts.png" alt="BadgeIcon" title="Typescript Developer" />
-                                <img src="/nodejs.png" alt="BadgeIcon" title="NodeJS Developer" />
-                                <img src="/bun.png" alt="BadgeIcon" title="Bun Developer" />
-                                <img src="/nestjs.png" alt="BadgeIcon" title="NestJS Experience" />
-                                <img src="/firebase.png" alt="BadgeIcon" title="Firebase Experience" />
+                                <SafeImage src="/js.png" alt="BadgeIcon" title="Javascript Developer" fallbackText="JS" width={64} height={64} />
+                                <SafeImage src="/ts.png" alt="BadgeIcon" title="Typescript Developer" fallbackText="TS" width={64} height={64} />
+                                <SafeImage src="/nodejs.png" alt="BadgeIcon" title="NodeJS Developer" fallbackText="Node" width={64} height={64} />
+                                <SafeImage src="/bun.png" alt="BadgeIcon" title="Bun Developer" fallbackText="Bun" width={64} height={64} />
+                                <SafeImage src="/nestjs.png" alt="BadgeIcon" title="NestJS Experience" fallbackText="Nest" width={64} height={64} />
+                                <SafeImage src="/firebase.png" alt="BadgeIcon" title="Firebase Experience" fallbackText="Firebase" width={64} height={64} />
                                 <button title="See more on Github" onClick={() => (window.location.href = githubLink)}>
                                     +15
                                 </button>
@@ -384,7 +410,7 @@ function App() {
                             </div> */}
                     </div>
                 </div>
-                <div className="sidebar">
+                <div className={`sidebar ${mobileMenuOpen ? "open" : ""}`}>
                     <h2>Currently Online</h2>
 
                     <div className="links">
@@ -393,10 +419,10 @@ function App() {
                         </a>
 
                         <div className="badges">
-                            <img src="/js.png" alt="BadgeIcon" title="Node Developer" />
-                            <img src="/ts.png" alt="BadgeIcon" title="Typescript Developer" />
+                            <SafeImage src="/js.png" alt="BadgeIcon" title="Node Developer" fallbackText="JS" width={56} height={56} />
+                            <SafeImage src="/ts.png" alt="BadgeIcon" title="Typescript Developer" fallbackText="TS" width={56} height={56} />
 
-                            <img
+                            <SafeImage
                                 src={
                                     "https://community.cloudflare.steamstatic.com/public/images/badges/02_years/steamyears" +
                                     (new Date().getFullYear() - sinceExperience) +
@@ -404,6 +430,9 @@ function App() {
                                 }
                                 alt="BadgeIcon"
                                 title="Years of Experience"
+                                fallbackText="XP"
+                                width={56}
+                                height={56}
                             />
 
                             {getLevelByGPQ(userRepos?.totalCommits)}
