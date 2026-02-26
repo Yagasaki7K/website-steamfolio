@@ -14,45 +14,9 @@ const SteamDetails = styled.div`
         z-index: -1;
     }
 
-    .loadingOverlay {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: rgba(0, 0, 0, 0.65);
-        color: var(--white);
-        font-family: "Motiva Sans", sans-serif;
-        z-index: 8;
-    }
-
-    .image-fallback {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        background: var(--transparent-hard);
-        color: var(--gray);
-        border: 1px dashed var(--gray);
-        font-size: 0.65rem;
-        text-transform: uppercase;
-        font-family: "Motiva Sans", sans-serif;
-    }
-
-    .mobileMenuButton {
-        display: none;
-        width: calc(100% - 2rem);
-        margin: 0 auto;
-        margin-top: 1rem;
-        background: var(--transparent-hard);
-        color: var(--white);
-        border: 1px solid var(--gray);
-        padding: 0.7rem;
-        font-family: "Motiva Sans", sans-serif;
-    }
-
     .content {
-        min-height: 16rem;
-        width: min(61rem, calc(100% - 2rem));
+        height: 16rem;
+        width: 61rem;
         margin: 0 auto;
         display: flex;
         content: "";
@@ -63,15 +27,12 @@ const SteamDetails = styled.div`
 
         .header {
             display: flex;
-            width: 100%;
 
             .avatar {
                 width: 11rem;
                 height: 11rem;
-                position: relative;
 
-                img,
-                .image-fallback {
+                img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
@@ -81,10 +42,8 @@ const SteamDetails = styled.div`
                     width: 13rem;
                     height: 13rem;
                     position: absolute;
-                    left: -1rem;
-                    top: -1rem;
-                    margin-left: 0;
-                    margin-top: 0;
+                    margin-left: -12rem;
+                    margin-top: -1rem;
                 }
             }
 
@@ -108,16 +67,12 @@ const SteamDetails = styled.div`
                     margin-top: -0.5rem;
                     align-items: center;
                     text-align: center;
-                    gap: 0.7rem;
 
                     .city {
-                        margin-left: 0;
+                        margin-left: 0.7rem;
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        display: flex;
-                        gap: 0.3rem;
-                        align-items: center;
                     }
                 }
 
@@ -178,10 +133,8 @@ const SteamDetails = styled.div`
                     width: 99%;
 
                     .leftContent {
-                        img,
-                        .image-fallback {
+                        img {
                             width: 3rem;
-                            height: 3rem;
                         }
                     }
 
@@ -245,8 +198,8 @@ const SteamDetails = styled.div`
     }
 
     .body {
-        width: min(61rem, calc(100% - 2rem));
-        min-height: 45rem;
+        width: 61rem;
+        height: 45rem;
         margin: 0 auto;
         display: flex;
         flex-direction: row;
@@ -319,12 +272,9 @@ const SteamDetails = styled.div`
                         background: var(--transparent-hard);
                         border-radius: 7px;
                         display: flex;
-                        flex-wrap: wrap;
 
-                        img,
-                        .image-fallback {
+                        img {
                             width: 4rem;
-                            height: 4rem;
                             margin: 0.2rem 0.5rem;
                             border: 1px solid var(--gray);
                             transition: 1s;
@@ -363,7 +313,7 @@ const SteamDetails = styled.div`
 
         .sidebar {
             width: 40%;
-            min-height: 43.6rem;
+            height: 43.6rem;
             background-color: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(20px);
             padding: 1rem;
@@ -406,16 +356,11 @@ const SteamDetails = styled.div`
                 }
 
                 .badges {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 0.4rem;
-
-                    img,
-                    .image-fallback {
+                    img {
                         width: 3.5rem;
                         height: 3.5rem;
                         object-fit: cover;
-                        margin-right: 0.4rem;
+                        margin-right: 1rem;
                         cursor: pointer;
                     }
 
@@ -439,78 +384,6 @@ const SteamDetails = styled.div`
             font-weight: 100;
             font-size: 1rem;
             margin-bottom: 1rem;
-        }
-    }
-
-    @media (max-width: 960px) {
-        .mobileMenuButton {
-            display: block;
-        }
-
-        .content {
-            padding: 1rem;
-
-            .header {
-                flex-direction: column;
-                gap: 1rem;
-
-                .avatar {
-                    width: 8rem;
-                    height: 8rem;
-
-                    .border {
-                        width: 9.5rem;
-                        height: 9.5rem;
-                    }
-                }
-
-                .nickname {
-                    width: 100%;
-                    padding: 0;
-                    line-height: 1.5;
-
-                    .subnick {
-                        flex-wrap: wrap;
-                        text-align: left;
-                    }
-                }
-
-                .level {
-                    width: 100%;
-                    margin: 0;
-
-                    .buttons {
-                        flex-wrap: wrap;
-                        gap: 0.4rem;
-
-                        button,
-                        a {
-                            min-height: 2.6rem;
-                        }
-                    }
-                }
-            }
-        }
-
-        .body {
-            flex-direction: column;
-            padding: 0.6rem;
-
-            .subgroups {
-                max-width: 100%;
-                padding-right: 0;
-            }
-
-            .sidebar {
-                width: 100%;
-                min-height: auto;
-                display: none;
-                margin-top: 0.5rem;
-            }
-
-            .sidebar.open {
-                display: block;
-            }
         }
     }
 `;
