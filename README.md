@@ -1,8 +1,9 @@
 <p align="center">
-   <img src="https://github.com/user-attachments/assets/3787b6b8-d860-44f7-b8f5-c21b2813c032" width="800"/>
+   <img src="https://github.com/user-attachments/assets/753ee1e7-57fa-4c21-ace0-3cf24024065d" width="800"/>
 </p>
 
 <p align="center">
+
    <a href="https://www.linkedin.com/in/andersonmarlon/">
       <img alt="AndersonMarlon" src="https://img.shields.io/badge/-AndersonMarlon-1fb5f1?style=flat&logo=Linkedin&logoColor=white" />
    </a>
