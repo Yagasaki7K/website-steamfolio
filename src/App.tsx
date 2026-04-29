@@ -194,7 +194,7 @@ function App() {
     // Fire
     // const avatarBorder = "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/322330/beaee5e90d93bfafa5f5f55acb23abfd28ad180c.png";
     // Summer
-    const avatarBorder = "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/items/2861720/410eecdbc6f2505e98863ab4200ca454032b40a2.png";
+    const avatarBorder = "https://shared.fastly.steamstatic.com/community_assets/images/items/4561430/bbeee526d6569be90b601d31c7177cc66f9d9fa0.png";
 
     const flag = "br";
 
@@ -203,9 +203,9 @@ function App() {
 
     // since your are developer
     const sinceExperience = 2020;
-    const infoSubTitle = "Transforming code into solutions";
+    const infoSubTitle = "software engineer.";
 
-    const badgeTitle = "Software Engineer II";
+    const badgeTitle = "Software Engineer";
     const badgeEXP = "12,649";
     const badgeIcon = "https://community.cloudflare.steamstatic.com/public/images/badges/30_steamawardnominations/level04_80.png";
     // Default
@@ -218,7 +218,7 @@ function App() {
     const perfilIconLink = "https://yagasaki.dev/about";
 
     // const urlAvatar = "https://github.com/" + userGitHub + ".png";
-    const fixedAvatar = "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/items/2861720/0f9367f89fad6b92c96b686442d61bcb86d627f5.gif";
+    const fixedAvatar = "https://avatars.fastly.steamstatic.com/cacaa5fc4f5ba79510ace77029a6fa1a1d7f561e_full.jpg";
     const nickname = userInfo?.name;
     const location = userInfo?.location;
     const infoTitle = userInfo?.bio;
@@ -291,8 +291,8 @@ function App() {
                         <h3>About</h3>
                         <p>
                             <img src="https://github.com/tairosonloa/tairosonloa/blob/main/assets/wave.gif?raw=true" width="15px" /> Hi, I'm{" "}
-                            <b>Anderson Marlon</b>, AKA Yagasaki, I'm Software Engineer @ R2A, Software Engineer and CTO @ Engide and Founder and
-                            Community Manager @ KalifyInc, feel free to enjoy to my open source community.
+                            <b>Anderson Marlon</b>, AKA <strong>Yagasaki</strong>, I'm Software Engineer and CTO @ Engide and Founder and
+                            Community Manager @ KalifyInc. Feel free to enjoy to my open source community or search me in X @ Yagasaki7K.
                         </p>
 
                         <h3>Technologies</h3>

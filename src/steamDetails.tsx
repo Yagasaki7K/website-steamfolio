@@ -4,7 +4,8 @@ const SteamDetails = styled.div`
     .background {
         width: 100%;
         height: 100vh;
-        background: url(background-cuttie.gif);
+        background: url(japanese.gif);
+        /* background: url(background-cuttie.gif); */
         /* background: url(background-winter.gif); */
         position: fixed;
         background-size: cover;
