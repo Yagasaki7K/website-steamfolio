@@ -203,7 +203,7 @@ function App() {
 
     // since your are developer
     const sinceExperience = 2020;
-    const infoSubTitle = "software engineer.";
+    const infoSubTitle = "net runner, hikikomori and software engineer.";
 
     const badgeTitle = "Software Engineer";
     const badgeEXP = "12,649";
