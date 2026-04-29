@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://github.com/Yagasaki7K/website-steamfolio/assets/23272064/508c8d81-7cf7-44d6-8246-4297923ecee4" width="800"/>
+   <img src="https://github.com/user-attachments/assets/3787b6b8-d860-44f7-b8f5-c21b2813c032" width="800"/>
 </p>
 
 <p align="center">
