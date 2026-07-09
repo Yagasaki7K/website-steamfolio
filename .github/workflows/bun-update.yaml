@@ -1,0 +1,73 @@
+name: Update Dependencies
+
+on:
+  schedule:
+    # Run every 2 days at 00:00 UTC
+    - cron: "0 0 */2 * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Update dependencies
+        run: bun update
+
+      - name: Check for changes
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            echo "No dependency updates were found."
+          else
+            echo "updated=true" >> "$GITHUB_OUTPUT"
+            echo "Dependency updates detected."
+          fi
+
+      - name: Exit when there are no updates
+        if: steps.changes.outputs.updated == 'false'
+        run: |
+          echo "Repository is already up to date."
+
+      - name: Verify build
+        if: steps.changes.outputs.updated == 'true'
+        run: bun vercel
+
+      - name: Configure Git
+        if: steps.changes.outputs.updated == 'true'
+        run: |
+          git config user.name "Anderson Marlon"
+          git config user.email "anderson18.marlon@gmail.com"
+
+      - name: Commit changes
+        if: steps.changes.outputs.updated == 'true'
+        run: |
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+
+          git commit -m "Update: Modules"
+
+      - name: Push changes
+        if: steps.changes.outputs.updated == 'true'
+        run: git push
