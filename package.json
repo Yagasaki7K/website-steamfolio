@@ -19,7 +19,7 @@
         "react": "^19.2.8",
         "react-dom": "^19.2.8",
         "sonner": "^2.0.8",
-        "styled-components": "^6.5.1"
+        "styled-components": "^6.5.2"
     },
     "devDependencies": {
         "@types/react": "^19.2.18",
