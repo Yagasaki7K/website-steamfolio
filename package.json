@@ -22,7 +22,7 @@
         "styled-components": "^6.7.0"
     },
     "devDependencies": {
-        "@types/react": "^19.3.1",
+        "@types/react": "^19.3.3",
         "@types/react-dom": "^19.3.0",
         "@typescript-eslint/eslint-plugin": "^8.74.0",
         "@typescript-eslint/parser": "^8.74.0",
